@@ -1,8 +1,6 @@
 # ProjektAlgorytmy
 ProjektAlgorytmy to program rozwiązujący problem szeregowania zadań korzystający z programowania genetycznego.
 
-*TO jest test*
-
 ## Użycie
 Kompilacja
 ```
