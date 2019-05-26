@@ -8,8 +8,7 @@ make
 ```
 
 ## Autorzy
-* **Aleksandra Chrzanowska** - *opis* [link](adres)
-* **Małgorzata Gwinner** - *opis* [link](adres)
-* **Wojciech Lepich** - *opis* [link](adres)
-* **Radosław Dyrcz** - *opis* [link](adres)
-
+* **Aleksandra Chrzanowska**
+* **Małgorzata Gwinner**
+* **Wojciech Lepich**
+* **Radosław Dyrcz**
