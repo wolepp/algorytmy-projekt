@@ -15,8 +15,11 @@ class Graf
     std::map<int, Info> m_wierzcholki;
 
   public:
-    void krytycznaSciezka(PrzydzialZasobow &przydzial); //gen1
-    void najdrozszaSciezka(PrzydzialZasobow &przydzial); //gen2
-    void najdrozszeTK(PrzydzialZasobow &przydzial); //gen3
-    void najmniejObciazony(PrzydzialZasobow &przydzial); //gen4
+    std::vector<int> sciezkaKrytyczna(const PrzydzialZasobow &przydzial);
+    std::vector<int> sciezkaNajdrozsza(const PrzydzialZasobow &przydzial);
+
+    void najszybszaSciezkaKrytyczna(PrzydzialZasobow &przydzial); //gen1
+    void najtanszaNajdrozszaSciezka(PrzydzialZasobow &przydzial); //gen2
+    void najmniejszeTK(PrzydzialZasobow &przydzial); //gen3
+    void najmniejObciazonyZasob(PrzydzialZasobow &przydzial); //gen4
 };

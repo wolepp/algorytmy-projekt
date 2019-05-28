@@ -1,17 +1,28 @@
 #include "Graf.hpp"
 
-void Graf::krytycznaSciezka(PrzydzialZasobow &przydzial) {
-    
+std::vector<int> Graf::sciezkaKrytyczna(const PrzydzialZasobow &przydzial) {
+    //Wojtek?
 }
 
-void Graf::najdrozszaSciezka(PrzydzialZasobow &przydzial) {
+std::vector<int> Graf::sciezkaNajdrozsza(const PrzydzialZasobow &przydzial) {
+    //Wojtek?
+}
+
+void Graf::najszybszaSciezkaKrytyczna(PrzydzialZasobow &przydzial) {
+    //Ola
+}
+
+void Graf::najtanszaNajdrozszaSciezka(PrzydzialZasobow &przydzial) {
+    //Ola
 
 }
 
-void Graf::najdrozszeTK(PrzydzialZasobow &przydzial) {
+void Graf::najmniejszeTK(PrzydzialZasobow &przydzial) {
+    //Ola
 
 }
 
-void Graf::najmniejObciazony(PrzydzialZasobow &przydzial) {
+void Graf::najmniejObciazonyZasob(PrzydzialZasobow &przydzial) {
+    //Ola
 
 }
