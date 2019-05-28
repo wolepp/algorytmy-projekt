@@ -1,7 +1,6 @@
 #include "PrzydzialZasobow.hpp"
 
-void PrzydzialZasobow::przydzielZasobZadaniu
-  (int zadanie, int zasob) 
+void PrzydzialZasobow::przydzielZasobZadaniu(int zasob, int zadanie)
 {
   m_przydzial[zadanie] = zasob;
 }

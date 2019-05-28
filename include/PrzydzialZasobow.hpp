@@ -10,7 +10,7 @@ class PrzydzialZasobow
     std::map<int, int> m_przydzial;
 
   public:
-    void przydzielZasobZadaniu(int zadanie, int zasob);
+    void przydzielZasobZadaniu(int zasob, int zadanie);
     int zasobZadania(int zadanie);
     std::vector<int> zadaniaZasobu(int zasob);
 };
