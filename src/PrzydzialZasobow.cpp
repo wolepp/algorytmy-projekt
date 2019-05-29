@@ -4,7 +4,7 @@ void PrzydzialZasobow::przydzielZasobZadaniu(int zasob, int zadanie) {
     m_przydzial[zadanie] = zasob;
 }
 
-int PrzydzialZasobow::zasobZadania(int zadanie) {
+int PrzydzialZasobow::zasobZadania(int zadanie) const {
     auto it = m_przydzial.find(zadanie);
     if (it == m_przydzial.end()) {
         return -1;
@@ -12,7 +12,7 @@ int PrzydzialZasobow::zasobZadania(int zadanie) {
     return it->second;
 }
 
-std::vector<int> PrzydzialZasobow::zadaniaZasobu(int zasob) {
+std::vector<int> PrzydzialZasobow::zadaniaZasobu(int zasob) const {
     std::vector<int> v;
     for (auto przydzial: m_przydzial) {
         if (przydzial.second == zasob) {

@@ -11,9 +11,9 @@ private:
 public:
     void przydzielZasobZadaniu(int zasob, int zadanie);
 
-    int zasobZadania(int zadanie);
+    int zasobZadania(int zadanie) const;
 
-    std::vector<int> zadaniaZasobu(int zasob);
+    std::vector<int> zadaniaZasobu(int zasob) const;
 };
 
 #endif /* ifndef PRZYDZIAL_ZASOBOW_HPP */
