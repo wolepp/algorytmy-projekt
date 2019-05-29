@@ -13,3 +13,5 @@ project(wojtek)
 #dodaj wybrane pliki źródłowe do własnego projektu do testowania
 add_executable(wojtek src/wojtek.cpp src/Graf.cpp src/PrzydzialZasobow.cpp)
 
+project(gosia)
+add_executable(gosia src/main.cpp)
