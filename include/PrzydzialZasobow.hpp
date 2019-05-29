@@ -4,14 +4,15 @@
 #include <map>
 #include <vector>
 
-class PrzydzialZasobow
-{
-  private:
+class PrzydzialZasobow {
+private:
     std::map<int, int> m_przydzial;
 
-  public:
+public:
     void przydzielZasobZadaniu(int zasob, int zadanie);
+
     int zasobZadania(int zadanie);
+
     std::vector<int> zadaniaZasobu(int zasob);
 };
 
