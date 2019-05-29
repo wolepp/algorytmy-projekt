@@ -59,20 +59,80 @@ std::vector<std::vector<int>> Graf::wszystkieSciezki() {
 }
 
 void Graf::najszybszaSciezkaKrytyczna(PrzydzialZasobow &przydzial) {
-    //Ola
+    for(auto i: sciezkaKrytyczna(przydzial)){
+        int zasob = przydzial.zasobZadania(i);
+        int minimalnyCzas = m_wierzcholki[i].times[zasob];
+        int temp = 0;
+        for(int j = 0; j < m_wierzcholki[i].times.size(); j++){
+            temp = m_wierzcholki[i].times[j];
+            if(temp < minimalnyCzas){
+                minimalnyCzas = temp;
+                przydzial.przydzielZasobZadaniu(j, i);
+            }
+        }
+    }
 }
 
 void Graf::najtanszaNajdrozszaSciezka(PrzydzialZasobow &przydzial) {
-    //Ola
-
+    for(auto i: sciezkaNajdrozsza(przydzial)){
+        int zasob = przydzial.zasobZadania(i);
+        int minimalnyKoszt = m_wierzcholki[i].cost[zasob];
+        int temp = 0;
+        for(int j = 0; j < m_wierzcholki[i].cost.size(); j++){
+            temp = m_wierzcholki[i].cost[j];
+            if(temp < minimalnyKoszt){
+                minimalnyKoszt = temp;
+                przydzial.przydzielZasobZadaniu(j, i);
+            }
+        }
+    }
 }
 
 void Graf::najmniejszeTK(PrzydzialZasobow &przydzial) {
-    //Ola
-
+    int iloczynTK = 0;
+    int wierzcholekMaxTK = 0;
+    for(auto i: m_wierzcholki){
+        int zasob = przydzial.zasobZadania(i.first);
+        int temp = m_wierzcholki[i.first].times[zasob] * m_wierzcholki[i.first].cost[zasob];
+        if(temp > iloczynTK){
+            iloczynTK = temp;
+            wierzcholekMaxTK = i.first;
+        }
+    }
+    int minIloczynTK = iloczynTK
+    for(int i = 0; i < m_wierzcholki[wierzcholekMaxTK].times.size(); i++){
+        int temp = m_wierzcholki[wierzcholekMaxTK].times[i] * m_wierzcholki[wierzcholekMaxTK].cost[i];
+        if(temp < minIloczynTK){
+            minIloczynTK = temp;
+            przydzial.przydzielZasobZadaniu(i, wierzcholekMaxTK);
+        }
+    }
 }
 
-void Graf::najmniejObciazonyZasob(PrzydzialZasobow &przydzial) {
-    //Ola
-
+void Graf::najmniejObciazonyZasob(PrzydzialZasobow &przydzial){
+    int najwiecejZadan = 0;
+    int najmniejZadan = m_wierzcholki.size();
+    int najbardziejObciazony = 0;
+    int najmniejObciazony = 0;
+    for(int i = 0; i < m_wierzcholki[sciezkaNajdrozsza(przydzial).front()].times.size();i++){
+        int temp = przydzial.zadaniaZasobu(i).size();
+        if(temp > najwiecejZadan){
+            najwiecejZadan = temp;
+            najbardziejObciazony = i;
+        }
+        if(temp < najmniejZadan){
+            najmniejZadan = temp;
+            najmniejObciazony = i;
+        }
+    }
+    int czasNajdluzszegoZadanie = 0;
+    int najdluzszeZadanie = 0;
+    for(auto i: przydzial.zadaniaZasobu(najbardziejObciazony)){
+        int temp = m_wierzcholki[i].cost[najbardziejObciazony];
+        if(temp > czasNajdluzszegoZadanie){
+            czasNajdluzszegoZadanie = temp;
+            najdluzszeZadanie = i;
+        }
+    }
+    przydzial.przydzielZasobZadaniu(najmniejObciazony, najdluzszeZadanie);
 }

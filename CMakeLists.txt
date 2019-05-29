@@ -15,3 +15,6 @@ add_executable(wojtek src/wojtek.cpp src/Graf.cpp src/PrzydzialZasobow.cpp)
 
 project(gosia)
 add_executable(gosia src/main.cpp)
+
+project(aleksandra)
+add_executable(aleksandra src/ola.cpp  )
