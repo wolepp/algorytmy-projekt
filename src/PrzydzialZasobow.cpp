@@ -5,7 +5,7 @@
 // random number generator from Stroustrup:
 // http://www.stroustrup.com/C++11FAQ.html#std-random
 int rand_int(int min, int max) {
-    static std::default_random_engine re {};
+    static std::random_device re {};
     using Dist = std::uniform_int_distribution<int>;
     static Dist uid {};
     return uid(re, Dist::param_type{min, max});

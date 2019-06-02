@@ -11,7 +11,7 @@ add_executable(glowny src/main.cpp src/Graf.cpp src/PrzydzialZasobow.cpp)
 #projekty do testowania (własne, można dodawać)
 project(wojtek)
 #dodaj wybrane pliki źródłowe do własnego projektu do testowania
-add_executable(wojtek src/wojtek.cpp src/Graf.cpp src/PrzydzialZasobow.cpp src/Wczytywanie.cpp)
+add_executable(wojtek src/wojtek.cpp src/Graf.cpp src/PrzydzialZasobow.cpp src/Wczytywanie.cpp src/Drzewo.cpp include/Drzewo.hpp src/Node.cpp include/Node.hpp)
 
 project(gosia)
 add_executable(gosia src/main.cpp)
