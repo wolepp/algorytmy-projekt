@@ -17,6 +17,10 @@ int main() {
         cout << x << " " << przydzial.zasobZadania(x) << "\n";
     }
 
+    for (int wierzcholek: g.sciezkaNajdrozsza(przydzial)) {
+        cout << wierzcholek << " ";
+    }
+
 
     return 0;
 }

@@ -20,13 +20,13 @@ Graf Wczytywanie::wczytaj(std::ifstream &myfile) {
                     char T;
                     int root, size;
                     myfile >> T >> root >> size;
-                    G.wierzcholki.insert(std::pair<int, Info>(root, informacja));
+                    G.m_wierzcholki.insert(std::pair<int, Info>(root, informacja));
                     for (int j = 0; j < size; j++) {
                         int t, x;
                         char y;
 
                         myfile >> t >> y >> x >> y;
-                        G.wierzcholki.find(i)->second.dzieci.push_back(t);
+                        G.m_wierzcholki.find(i)->second.dzieci.push_back(t);
                     }
                 }
             } else if (pierwsze == "@proc") {
@@ -42,7 +42,7 @@ Graf Wczytywanie::wczytaj(std::ifstream &myfile) {
                     }
                 }
 
-            } else if (pierwsze == "@costs") {
+            } else if (pierwsze == "@cost") {
                 int x, y, z, a;
                 for (int i = 0; i < liczba_zadan; i++) {
                     for (int j = 0; j < zasoby; j++) {
