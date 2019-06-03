@@ -2,16 +2,9 @@
 
 #include <random>
 
-typedef void (Graf::*funkcjaGenu)(PrzydzialZasobow&);
+typedef void (Graf::*funkcjaGenu)(PrzydzialZasobow&) const;
 
-// random number generator from Stroustrup:
-// http://www.stroustrup.com/C++11FAQ.html#std-random
-int rand_int(int min, int max) {
-    static std::random_device re {};
-    using Dist = std::uniform_int_distribution<int>;
-    static Dist uid {};
-    return uid(re, Dist::param_type{min, max});
-}
+int rand_int(int min, int max);
 
 funkcjaGenu losowyGen() {
     switch (rand_int(0, 3)) {
@@ -48,4 +41,17 @@ Drzewo Drzewo::losowyGenotyp(int liczbaWezlow) {
         tmp->m_gen = losowyGen();
     }
     return d;
+}
+
+void DFS(PrzydzialZasobow &przydzial, Node* wezel, const Graf &graf) {
+    WYWOLAJ_METODE(graf, wezel->m_gen)(przydzial);
+    for (Node* dziecko: wezel->dzieci()) {
+        DFS(przydzial, dziecko, graf);
+    }
+}
+
+PrzydzialZasobow Drzewo::fenotyp(const Graf &graf) {
+    PrzydzialZasobow fenotyp = m_embrion;
+    DFS(m_embrion, m_root, graf);
+    return fenotyp;
 }

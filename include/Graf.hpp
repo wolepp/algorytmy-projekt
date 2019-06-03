@@ -17,18 +17,18 @@ public:
     std::map<int, Info> m_wierzcholki;
     int iloscZasobow;
 
-    void znajdzSciezki(std::vector<int> &sciezka, std::vector<std::vector<int>> &);
+    void znajdzSciezki(std::vector<int> &sciezka, std::vector<std::vector<int>> &) const;
 
     //funkcje genów
-    void najszybszaSciezkaKrytyczna(PrzydzialZasobow &przydzial); //gen1
-    void najtanszaNajdrozszaSciezka(PrzydzialZasobow &przydzial); //gen2
-    void najmniejszeTK(PrzydzialZasobow &przydzial); //gen3
-    void najmniejObciazonyZasob(PrzydzialZasobow &przydzial); //gen4
+    void najszybszaSciezkaKrytyczna(PrzydzialZasobow &przydzial) const; //gen1
+    void najtanszaNajdrozszaSciezka(PrzydzialZasobow &przydzial) const; //gen2
+    void najmniejszeTK(PrzydzialZasobow &przydzial) const; //gen3
+    void najmniejObciazonyZasob(PrzydzialZasobow &przydzial) const; //gen4
 
-    std::vector<int> sciezkaKrytyczna(const PrzydzialZasobow &przydzial);
-    std::vector<int> sciezkaNajdrozsza(const PrzydzialZasobow &przydzial);
-    std::vector<int> numeryWierzcholkow();
-    std::vector<std::vector<int>> wszystkieSciezki();
+    std::vector<int> sciezkaKrytyczna(const PrzydzialZasobow &przydzial) const;
+    std::vector<int> sciezkaNajdrozsza(const PrzydzialZasobow &przydzial) const;
+    std::vector<int> numeryWierzcholkow() const;
+    std::vector<std::vector<int>> wszystkieSciezki() const;
 };
 
 #endif //GRAF_HPP

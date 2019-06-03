@@ -9,7 +9,7 @@
 
 #include "Graf.hpp"
 
-typedef void (Graf::*funkcjaGenu)(PrzydzialZasobow&);
+typedef void (Graf::*funkcjaGenu)(PrzydzialZasobow&) const;
 
 class Node {
 public:

@@ -11,9 +11,5 @@ int main() {
     Graf g = Wczytywanie::wczytaj(plik);
     auto przydzial = PrzydzialZasobow::losowyPrzydzial(g.numeryWierzcholkow(), g.iloscZasobow);
 
-    void (Graf::*func)(PrzydzialZasobow&) = &Graf::najszybszaSciezkaKrytyczna;
-    (g.*func)(przydzial);
-
-
     return 0;
 }

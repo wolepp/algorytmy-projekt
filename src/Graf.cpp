@@ -17,7 +17,7 @@ std::vector<int> znajdzMaxSciezke(const std::vector<std::vector<int>> &sciezki, 
     return maxSciezka;
 }
 
-std::vector<int> Graf::sciezkaKrytyczna(const PrzydzialZasobow &przydzial) {
+std::vector<int> Graf::sciezkaKrytyczna(const PrzydzialZasobow &przydzial) const {
     std::map<int, int> czasy;
     for (auto &wierzcholek: m_wierzcholki) {
         int numerWierzcholka = wierzcholek.first;
@@ -28,7 +28,7 @@ std::vector<int> Graf::sciezkaKrytyczna(const PrzydzialZasobow &przydzial) {
     return znajdzMaxSciezke(wszystkieSciezki(), czasy);
 }
 
-std::vector<int> Graf::sciezkaNajdrozsza(const PrzydzialZasobow &przydzial) {
+std::vector<int> Graf::sciezkaNajdrozsza(const PrzydzialZasobow &przydzial) const {
     std::map<int, int> koszty;
     for (auto &wierzcholek: m_wierzcholki) {
         int numerWierzcholka = wierzcholek.first;
@@ -39,7 +39,7 @@ std::vector<int> Graf::sciezkaNajdrozsza(const PrzydzialZasobow &przydzial) {
     return znajdzMaxSciezke(wszystkieSciezki(), koszty);
 }
 
-void Graf::znajdzSciezki(std::vector<int> &sciezka, std::vector<std::vector<int>> &sciezki) {
+void Graf::znajdzSciezki(std::vector<int> &sciezka, std::vector<std::vector<int>> &sciezki) const {
     for (int dziecko: m_wierzcholki[sciezka.back()].dzieci) {
         sciezka.push_back(dziecko);
         znajdzSciezki(sciezka, sciezki);
@@ -50,7 +50,7 @@ void Graf::znajdzSciezki(std::vector<int> &sciezka, std::vector<std::vector<int>
     sciezka.pop_back();
 }
 
-std::vector<std::vector<int>> Graf::wszystkieSciezki() {
+std::vector<std::vector<int>> Graf::wszystkieSciezki() const {
     std::vector<int> sciezka;
     sciezka.push_back(m_wierzcholki.begin()->first);
     std::vector<std::vector<int>> sciezki;
@@ -58,7 +58,7 @@ std::vector<std::vector<int>> Graf::wszystkieSciezki() {
     return sciezki;
 }
 
-void Graf::najszybszaSciezkaKrytyczna(PrzydzialZasobow &przydzial) {
+void Graf::najszybszaSciezkaKrytyczna(PrzydzialZasobow &przydzial) const {
     for(auto i: sciezkaKrytyczna(przydzial)){
         int zasob = przydzial.zasobZadania(i);
         int minimalnyCzas = m_wierzcholki[i].times[zasob];
@@ -73,7 +73,7 @@ void Graf::najszybszaSciezkaKrytyczna(PrzydzialZasobow &przydzial) {
     }
 }
 
-void Graf::najtanszaNajdrozszaSciezka(PrzydzialZasobow &przydzial) {
+void Graf::najtanszaNajdrozszaSciezka(PrzydzialZasobow &przydzial) const {
     for(auto i: sciezkaNajdrozsza(przydzial)){
         int zasob = przydzial.zasobZadania(i);
         int minimalnyKoszt = m_wierzcholki[i].costs[zasob];
@@ -88,7 +88,7 @@ void Graf::najtanszaNajdrozszaSciezka(PrzydzialZasobow &przydzial) {
     }
 }
 
-void Graf::najmniejszeTK(PrzydzialZasobow &przydzial) {
+void Graf::najmniejszeTK(PrzydzialZasobow &przydzial) const {
     int iloczynTK = 0;
     int wierzcholekMaxTK = 0;
     for(const auto &i: m_wierzcholki){
@@ -109,7 +109,7 @@ void Graf::najmniejszeTK(PrzydzialZasobow &przydzial) {
     }
 }
 
-void Graf::najmniejObciazonyZasob(PrzydzialZasobow &przydzial){
+void Graf::najmniejObciazonyZasob(PrzydzialZasobow &przydzial) const {
     int najwiecejZadan = 0;
     int najmniejZadan = m_wierzcholki.size();
     int najbardziejObciazony = 0;
@@ -137,7 +137,7 @@ void Graf::najmniejObciazonyZasob(PrzydzialZasobow &przydzial){
     przydzial.przydzielZasobZadaniu(najmniejObciazony, najdluzszeZadanie);
 }
 
-std::vector<int> Graf::numeryWierzcholkow() {
+std::vector<int> Graf::numeryWierzcholkow() const {
     std::vector<int> v(m_wierzcholki.size());
     int i {0};
     for (const auto &wierzcholek: m_wierzcholki) {
@@ -145,3 +145,4 @@ std::vector<int> Graf::numeryWierzcholkow() {
     }
     return v;
 }
+

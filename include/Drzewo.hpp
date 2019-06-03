@@ -1,6 +1,8 @@
 #ifndef DRZEWO_HPP
 #define DRZEWO_HPP
 
+#define WYWOLAJ_METODE(obiekt, wskaznik) ((obiekt).*(wskaznik))
+
 #include "PrzydzialZasobow.hpp"
 #include "Graf.hpp"
 #include "Node.hpp"
@@ -18,6 +20,8 @@ public:
     Drzewo(const Drzewo& d);
 
     void ustawEmbrion(PrzydzialZasobow);
+
+    PrzydzialZasobow fenotyp(const Graf &graf);
 
     static Drzewo losowyGenotyp(); // liczbaWezlow = 10
     static Drzewo losowyGenotyp(int liczbaWezlow);
