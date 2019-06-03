@@ -146,3 +146,21 @@ std::vector<int> Graf::numeryWierzcholkow() const {
     return v;
 }
 
+int Graf::czasWszytskichZadan(const PrzydzialZasobow &przydzial) {
+    int calkowityCzas = 0;
+    for(auto i: m_wierzcholki){
+        int temp = przydzial.zasobZadania(i.first);
+        calkowityCzas += i.second.times[temp];
+    }
+    //toDO: czas trasmisji tc
+    return calkowityCzas;
+}
+
+int Graf::kosztWszystkichZadan(const PrzydzialZasobow &przydzial) {
+    int calkowityKoszt = 0;
+    for(auto i: m_wierzcholki){
+        int temp = przydzial.zasobZadania(i.first);
+        calkowityKoszt += i.second.costs[temp];
+    }
+    return calkowityKoszt;
+}
