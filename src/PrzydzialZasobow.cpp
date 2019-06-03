@@ -25,12 +25,11 @@ int PrzydzialZasobow::zasobZadania(int zadanie) const {
 
 std::vector<int> PrzydzialZasobow::zadaniaZasobu(int zasob) const {
     std::vector<int> v;
-    for (auto przydzial: m_przydzial) {
+    for (const auto &przydzial: m_przydzial) {
         if (przydzial.second == zasob) {
             v.push_back(przydzial.first);
         }
     }
-
     return v;
 }
 

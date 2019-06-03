@@ -9,7 +9,8 @@ int main() {
 
     std::ifstream plik{"../graf10"};
     Graf g = Wczytywanie::wczytaj(plik);
-    auto przydzial = PrzydzialZasobow::losowyPrzydzial(g.numeryWierzcholkow(), g.iloscZasobow);
+
+
 
     return 0;
 }
