@@ -40,11 +40,11 @@ std::vector<int> Graf::sciezkaNajdrozsza(const PrzydzialZasobow &przydzial) cons
 }
 
 void Graf::znajdzSciezki(std::vector<int> &sciezka, std::vector<std::vector<int>> &sciezki) const {
-    for (int dziecko: m_wierzcholki[sciezka.back()].dzieci) {
+    for (int dziecko: m_wierzcholki.at(sciezka.back()).dzieci) {
         sciezka.push_back(dziecko);
         znajdzSciezki(sciezka, sciezki);
     }
-    if (m_wierzcholki[sciezka.back()].dzieci.empty()) {
+    if (m_wierzcholki.at(sciezka.back()).dzieci.empty()) {
         sciezki.push_back(sciezka);
     }
     sciezka.pop_back();
@@ -61,10 +61,10 @@ std::vector<std::vector<int>> Graf::wszystkieSciezki() const {
 void Graf::najszybszaSciezkaKrytyczna(PrzydzialZasobow &przydzial) const {
     for(auto i: sciezkaKrytyczna(przydzial)){
         int zasob = przydzial.zasobZadania(i);
-        int minimalnyCzas = m_wierzcholki[i].times[zasob];
+        int minimalnyCzas = m_wierzcholki.at(i).times[zasob];
         int temp = 0;
-        for(int j = 0; j < m_wierzcholki[i].times.size(); j++){
-            temp = m_wierzcholki[i].times[j];
+        for(int j = 0; j < m_wierzcholki.at(i).times.size(); j++){
+            temp = m_wierzcholki.at(i).times[j];
             if(temp < minimalnyCzas){
                 minimalnyCzas = temp;
                 przydzial.przydzielZasobZadaniu(j, i);
@@ -76,10 +76,10 @@ void Graf::najszybszaSciezkaKrytyczna(PrzydzialZasobow &przydzial) const {
 void Graf::najtanszaNajdrozszaSciezka(PrzydzialZasobow &przydzial) const {
     for(auto i: sciezkaNajdrozsza(przydzial)){
         int zasob = przydzial.zasobZadania(i);
-        int minimalnyKoszt = m_wierzcholki[i].costs[zasob];
+        int minimalnyKoszt = m_wierzcholki.at(i).costs[zasob];
         int temp = 0;
-        for(int j = 0; j < m_wierzcholki[i].costs.size(); j++){
-            temp = m_wierzcholki[i].costs[j];
+        for(int j = 0; j < m_wierzcholki.at(i).costs.size(); j++){
+            temp = m_wierzcholki.at(i).costs[j];
             if(temp < minimalnyKoszt){
                 minimalnyKoszt = temp;
                 przydzial.przydzielZasobZadaniu(j, i);
@@ -93,15 +93,15 @@ void Graf::najmniejszeTK(PrzydzialZasobow &przydzial) const {
     int wierzcholekMaxTK = 0;
     for(const auto &i: m_wierzcholki){
         int zasob = przydzial.zasobZadania(i.first);
-        int temp = m_wierzcholki[i.first].times[zasob] * m_wierzcholki[i.first].costs[zasob];
+        int temp = m_wierzcholki.at(i.first).times[zasob] * m_wierzcholki.at(i.first).costs[zasob];
         if(temp > iloczynTK){
             iloczynTK = temp;
             wierzcholekMaxTK = i.first;
         }
     }
     int minIloczynTK = iloczynTK;
-    for(int i = 0; i < m_wierzcholki[wierzcholekMaxTK].times.size(); i++){
-        int temp = m_wierzcholki[wierzcholekMaxTK].times[i] * m_wierzcholki[wierzcholekMaxTK].costs[i];
+    for(int i = 0; i < m_wierzcholki.at(wierzcholekMaxTK).times.size(); i++){
+        int temp = m_wierzcholki.at(wierzcholekMaxTK).times[i] * m_wierzcholki.at(wierzcholekMaxTK).costs[i];
         if(temp < minIloczynTK){
             minIloczynTK = temp;
             przydzial.przydzielZasobZadaniu(i, wierzcholekMaxTK);
@@ -114,7 +114,7 @@ void Graf::najmniejObciazonyZasob(PrzydzialZasobow &przydzial) const {
     int najmniejZadan = m_wierzcholki.size();
     int najbardziejObciazony = 0;
     int najmniejObciazony = 0;
-    for(int i = 0; i < m_wierzcholki[sciezkaNajdrozsza(przydzial).front()].times.size();i++){
+    for(int i = 0; i < m_wierzcholki.at(sciezkaNajdrozsza(przydzial).front()).times.size(); i++){
         int temp = przydzial.zadaniaZasobu(i).size();
         if(temp > najwiecejZadan){
             najwiecejZadan = temp;
@@ -128,7 +128,7 @@ void Graf::najmniejObciazonyZasob(PrzydzialZasobow &przydzial) const {
     int czasNajdluzszegoZadanie = 0;
     int najdluzszeZadanie = 0;
     for(auto i: przydzial.zadaniaZasobu(najbardziejObciazony)){
-        int temp = m_wierzcholki[i].costs[najbardziejObciazony];
+        int temp = m_wierzcholki.at(i).costs[najbardziejObciazony];
         if(temp > czasNajdluzszegoZadanie){
             czasNajdluzszegoZadanie = temp;
             najdluzszeZadanie = i;
