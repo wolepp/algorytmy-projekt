@@ -146,7 +146,7 @@ std::vector<int> Graf::numeryWierzcholkow() const {
     return v;
 }
 
-int Graf::czasWszytskichZadan(const PrzydzialZasobow &przydzial) {
+int Graf::czasWszytskichZadan(const PrzydzialZasobow &przydzial) const {
     int calkowityCzas = 0;
     for(auto i: m_wierzcholki){
         int temp = przydzial.zasobZadania(i.first);
@@ -156,7 +156,7 @@ int Graf::czasWszytskichZadan(const PrzydzialZasobow &przydzial) {
     return calkowityCzas;
 }
 
-int Graf::kosztWszystkichZadan(const PrzydzialZasobow &przydzial) {
+int Graf::kosztWszystkichZadan(const PrzydzialZasobow &przydzial) const {
     int calkowityKoszt = 0;
     for(auto i: m_wierzcholki){
         int temp = przydzial.zasobZadania(i.first);
