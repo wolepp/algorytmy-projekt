@@ -29,6 +29,8 @@ public:
     std::vector<int> sciezkaNajdrozsza(const PrzydzialZasobow &przydzial);
     std::vector<int> numeryWierzcholkow();
     std::vector<std::vector<int>> wszystkieSciezki();
+    int czasWszytskichZadan(const PrzydzialZasobow &przydziall);
+    int kosztWszystkichZadan(const PrzydzialZasobow &przydzial);
 };
 
 #endif //GRAF_HPP
