@@ -148,6 +148,7 @@ std::vector<int> Graf::numeryWierzcholkow() const {
 
 int Graf::czasWszytskichZadan(const PrzydzialZasobow &przydzial) const {
     int calkowityCzas = 0;
+    //todo: na ścieżce krytycznej, nie wszystkie
     for(auto i: m_wierzcholki){
         int temp = przydzial.zasobZadania(i.first);
         calkowityCzas += i.second.times[temp];

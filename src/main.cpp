@@ -5,6 +5,16 @@
 #include "Graf.hpp"
 #include "Wczytywanie.hpp"
 
+/**
+ * @param c parametr od użytkownika
+ * @param t parametr od użytkownika
+ * @param przydzialZasobow osobnik
+ * @param graf daje czas i koszt potrzebny do obliczeń
+ * @return wartość funkcji dopasowania wg wzoru: c*koszt + t*czas
+ */
+ //todo: Radek. Tylko pisz definicje pod mainem :P
+int funkcjaDopasowania(int c, int t, const PrzydzialZasobow &przydzialZasobow, Graf &graf);
+
 int main(int argc, char *argv[]) {
 
     std::ifstream input;
@@ -20,9 +30,6 @@ int main(int argc, char *argv[]) {
     input.close();
 
     std::cout << "EEO";
-
-    // pobierz parametry
-    // ogólnie w jakiejś pętli wyświetlanie i akceptowanie
 
 
     return 0;
