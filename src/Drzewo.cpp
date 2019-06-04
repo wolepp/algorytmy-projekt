@@ -44,7 +44,9 @@ Drzewo Drzewo::losowyGenotyp(int liczbaWezlow) {
 }
 
 void DFS(PrzydzialZasobow &przydzial, Node* wezel, const Graf &graf) {
-    WYWOLAJ_METODE(graf, wezel->m_gen)(przydzial);
+    if (wezel->m_gen != nullptr) {
+        WYWOLAJ_METODE(graf, wezel->m_gen)(przydzial);
+    }
     for (Node* dziecko: wezel->dzieci()) {
         DFS(przydzial, dziecko, graf);
     }
