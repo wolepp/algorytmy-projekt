@@ -36,3 +36,11 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
+
+void funkcjaDopasowania(int c, int t, PrzydzialZasobow &przydzialZasobow, Graf &graf){
+
+    int f;
+    f=(c*graf.kosztWszystkichZadan(przydzialZasobow))+t*graf.czasWszytskichZadan(przydzialZasobow);
+
+    przydzialZasobow.setWartoscFunkcjiDopasowania(f);
+}

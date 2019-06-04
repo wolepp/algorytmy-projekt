@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.13.2)
 set(CMAKE_CXX_STANDARD 14)
 
 #Główny projekt, nie usuwać
@@ -18,3 +18,5 @@ add_executable(gosia src/main.cpp)
 
 project(aleksandra)
 add_executable(aleksandra src/ola.cpp)
+
+project(radek)
