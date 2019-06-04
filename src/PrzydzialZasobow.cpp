@@ -65,3 +65,11 @@ PrzydzialZasobow PrzydzialZasobow::losowyPrzydzial(const std::vector<int>& zadan
     }
     return przydzialZasobow;
 }
+
+int PrzydzialZasobow::getWartoscFunkcjiDopasowania() const {
+    return wartoscFunkcjiDopasowania;
+}
+
+void PrzydzialZasobow::setWartoscFunkcjiDopasowania(int wartosc) {
+    PrzydzialZasobow::wartoscFunkcjiDopasowania = wartosc;
+}

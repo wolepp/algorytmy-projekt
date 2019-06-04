@@ -7,11 +7,15 @@
 class PrzydzialZasobow {
 private:
     std::map<int, int> m_przydzial;
+    int wartoscFunkcjiDopasowania;
 
 public:
     void przydzielZasobZadaniu(int zasob, int zadanie);
     int zasobZadania(int zadanie) const;
     std::vector<int> zadaniaZasobu(int zasob) const;
+
+    int getWartoscFunkcjiDopasowania() const;
+    void setWartoscFunkcjiDopasowania(int wartosc);
 
     static PrzydzialZasobow losowyPrzydzial(const std::vector<int>& zadania, const std::vector<int>& zasoby);
     static PrzydzialZasobow losowyPrzydzial(int iloscZadan, int iloscZasobow);
