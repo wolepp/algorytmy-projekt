@@ -14,9 +14,7 @@ struct Dziecko {
 struct Info {
     std::vector<int> times;
     std::vector<int> costs;
-    std::vector<int> dzieci;
-    //TODO: zmiana na wektor Dzieci
-    //std::vector<Dzieci> dzieci;
+    std::vector<Dziecko> dzieci;
 };
 
 class Graf {
