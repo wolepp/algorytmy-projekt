@@ -97,6 +97,9 @@ public:
      * @return
      */
     int kosztWszystkichZadan(const PrzydzialZasobow &przydzial) const;
+
+private:
+    int czasTransmisji(int wierzcholek, const PrzydzialZasobow &przydzial);
 };
 
 #endif //GRAF_HPP
