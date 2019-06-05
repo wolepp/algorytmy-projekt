@@ -1,4 +1,4 @@
-#include <math.h>
+#include <cmath>
 #include "Graf.hpp"
 
 std::vector<int> znajdzMaxSciezke(const std::vector<std::vector<int>> &sciezki, std::map<int, int> wagi)
