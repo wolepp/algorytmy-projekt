@@ -27,6 +27,19 @@ public:
     void ustawEmbrion(PrzydzialZasobow przydzialZasobow);
 
     /**
+     * Wyszukuje w drzewie węzeł o podanym id.
+     * @param id identyfikator szukanego węzła
+     * @return wskaźnik na znaleziony węzeł
+     */
+    Node* znajdzWezel(int id);
+
+    /**
+     * Oblicza liczbę węzłów drzewa.
+     * @return liczba węzłów drzewa.
+     */
+    int size();
+
+    /**
      * Zwraca fenotyp (rozwiązanie) danego drzewa.
      * @param graf graf na którym dane drzewo ustala rozwiązanie
      * @return PrzydzialZasobow będący rozwiązaniem

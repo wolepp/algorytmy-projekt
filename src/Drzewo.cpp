@@ -57,3 +57,12 @@ PrzydzialZasobow Drzewo::fenotyp(const Graf &graf) {
     DFS(m_embrion, m_root, graf);
     return fenotyp;
 }
+
+Node *Drzewo::znajdzWezel(int id) {
+    return m_root->znajdzWezel(id);
+}
+
+int Drzewo::size() {
+    //todo: implementacja xD
+    return 5;
+}

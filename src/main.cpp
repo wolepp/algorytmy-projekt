@@ -8,13 +8,10 @@
 /**
  * @param c parametr od użytkownika
  * @param t parametr od użytkownika
- * @param przydzialZasobow osobnik, tam jest wstawiany wynik
+ * @param przydzialZasobow osobnik
  * @param graf daje czas i koszt potrzebny do obliczeń
  * @return wartość funkcji dopasowania wg wzoru: c*koszt + t*czas
  */
- //todo: Radek. Tylko pisz definicje pod mainem :P
- //W PrzydzialZasobow jest setCośtamcośtam i tam wstawiasz wynik,
- //w grafie jest czasWszystkichZadan i kosztCośtamcośtam
 void funkcjaDopasowania(int c, int t, PrzydzialZasobow &przydzialZasobow, Graf &graf);
 
 int main(int argc, char *argv[]) {
