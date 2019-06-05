@@ -6,6 +6,7 @@
 #include "Wczytywanie.hpp"
 #include "Drzewo.hpp"
 #include "Graf.hpp"
+#include "Interfejs.hpp"
 
 typedef std::vector<Drzewo*> Rozwiazania;
 
@@ -62,8 +63,8 @@ int main(int argc, char *argv[]) {
     input.open(filename);
     Graf graf = Wczytywanie::wczytaj(input);
     input.close();
-
-    std::cout << "EEO";
+    Interfejs interfejs;
+    Parametry parametry = interfejs.pobierzParametry();
 
 
     return 0;
