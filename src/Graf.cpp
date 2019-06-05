@@ -146,12 +146,29 @@ std::vector<int> Graf::numeryWierzcholkow() const {
     return v;
 }
 
+
+
+int Graf::czasTransmisji(int wierzcholek, const PrzydzialZasobow &przydzial) {
+    int temp = 0;
+    int calkowityCzasTransmisji = 0;
+    for (Dziecko i: m_wierzcholki.at(wierzcholek).dzieci) {
+        temp = czasTransmisji(i.id, przydzial);
+        if (przydzial.zasobZadania(wierzcholek) != przydzial.zasobZadania(i.id)) {
+            calkowityCzasTransmisji += 3;//wzor;
+        }
+        calkowityCzasTransmisji += temp;
+    }
+    return calkowityCzasTransmisji;
+}
+
 int Graf::czasWszytskichZadan(const PrzydzialZasobow &przydzial) const {
     int calkowityCzas = 0;
-    //todo: na ścieżce krytycznej, nie wszystkie
-    for(auto i: m_wierzcholki){
-        int temp = przydzial.zasobZadania(i.first);
-        calkowityCzas += i.second.times[temp];
+    for(int i: sciezkaKrytyczna(przydzial)){
+        int temp = przydzial.zasobZadania(i);
+        calkowityCzas += m_wierzcholki.at(i).times.at(temp);
+    }
+    for(int i: m_wierzcholki){
+       // rekurencyjnie dla każdego zwraca int
     }
     //toDO: czas trasmisji tc
     return calkowityCzas;
