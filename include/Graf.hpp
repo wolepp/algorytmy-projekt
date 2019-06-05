@@ -6,10 +6,17 @@
 
 #include "PrzydzialZasobow.hpp"
 
+struct Dziecko {
+    int id;
+    int waga;
+};
+
 struct Info {
     std::vector<int> times;
     std::vector<int> costs;
     std::vector<int> dzieci;
+    //TODO: zmiana na wektor Dzieci
+    //std::vector<Dzieci> dzieci;
 };
 
 class Graf {

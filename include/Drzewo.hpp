@@ -46,6 +46,18 @@ public:
      */
     PrzydzialZasobow fenotyp(const Graf &graf);
 
+    /**
+     * Zmienia w losowym węźle gen na inny losowo wybrany.
+     */
+     //TODO: Radosław
+    void operatorMutacji();
+    /* przydatne funkcje:
+     *  rand_int(min, max) - jest w Drzewo.cpp, więc luzik
+     *  m_root.znajdzWezel( rand_int(1, size() )) - losowy węzeł, z wyłączeniem korzenia
+     *  losowyGen() - zwraca funkcjaGenu, i to wstawiasz do tego węzła.m_gen; tylko sprawdź
+     *      czy nie wylosował ci się ten sam :P
+     */
+
     static Drzewo losowyGenotyp(); // liczbaWezlow = 10
     /**
      * Zwraca Drzewo zbudowane w sposób losowy.

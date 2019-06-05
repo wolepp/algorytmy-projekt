@@ -4,6 +4,12 @@
 
 typedef void (Graf::*funkcjaGenu)(PrzydzialZasobow&) const;
 
+/**
+ * Zwraca losową liczbę całkowitą z przedziału [min, max].
+ * @param min początek przedziału - zawiera się w
+ * @param max koniec przedziału - zawiera się w
+ * @return losowa liczba
+ */
 int rand_int(int min, int max);
 
 funkcjaGenu losowyGen() {

@@ -1,9 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 
-#include "Graf.hpp"
 #include "Wczytywanie.hpp"
+#include "Drzewo.hpp"
+#include "Graf.hpp"
+
+typedef std::vector<Drzewo*> Rozwiazania;
 
 /**
  * @param c parametr od użytkownika
@@ -13,6 +17,37 @@
  * @return wartość funkcji dopasowania wg wzoru: c*koszt + t*czas
  */
 void funkcjaDopasowania(int c, int t, PrzydzialZasobow &przydzialZasobow, Graf &graf);
+
+/**
+ * Operator mutacji.
+ * Dokonuje mutacji na osobnikach podanych w parametrze.
+ * @param pokolenie wskaźniki do drzew, na których ma nastąpić mutacja
+ * @param liczba liczba rozwiązań do zmutowania
+ * @return Rozwiazania - nowa część pokolenia z mutacji
+ */
+ //TODO: Radosław
+Rozwiazania mutacja(Rozwiazania &pokolenie, int liczba);
+
+/**
+ * Operator selekcji.
+ * Rozwiązania są przechowywane na liście rankingowej. Z niej wybierane
+ * są osobniki.
+ * @param pokolenie
+ * @param liczba liczba rozwiązań do selekcji
+ * @return Rozwiazania - nowa część pokolenia z selekcji
+ */
+ // Osobniki nie z góry lecąc, tam jest jakiś wzór na wybór z prawdopodobieństwem
+ //TODO: Radosław
+Rozwiazania selekcja(Rozwiazania &pokolenie, int liczba);
+
+/**
+ * Operator krzyżowania.
+ * Krzyżuje drzewa spośród wybranych.
+ * @param osobniki
+ * @param liczba liczba osobników, które mają wyjść z krzyżowania
+ * @return Rozwiazania - nowa część pokolenia z krzyżowania
+ */
+Rozwiazania krzyzowanie(Rozwiazania &osobniki, int liczba);
 
 int main(int argc, char *argv[]) {
 
