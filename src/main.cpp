@@ -7,6 +7,7 @@
 #include "Drzewo.hpp"
 #include "Graf.hpp"
 #include "Interfejs.hpp"
+#include "Random.hpp"
 
 typedef std::vector<Drzewo*> Rozwiazania;
 
@@ -76,4 +77,11 @@ void funkcjaDopasowania(int c, int t, PrzydzialZasobow &przydzialZasobow, Graf &
     f=(c*graf.kosztWszystkichZadan(przydzialZasobow))+t*graf.czasWszytskichZadan(przydzialZasobow);
 
     przydzialZasobow.setWartoscFunkcjiDopasowania(f);
+}
+
+Rozwiazania krzyzowanie(Rozwiazania &osobniki, int liczba) {
+    Rozwiazania noweRozwiazania;
+    
+    
+    return noweRozwiazania;
 }

@@ -183,3 +183,7 @@ int Graf::kosztWszystkichZadan(const PrzydzialZasobow &przydzial) const {
     }
     return calkowityKoszt;
 }
+
+int Graf::rozmiar() const {
+    return m_wierzcholki.size();
+}

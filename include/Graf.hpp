@@ -99,6 +99,12 @@ public:
      */
     int kosztWszystkichZadan(const PrzydzialZasobow &przydzial) const;
 
+    /**
+     * Zwraca liczbę wierzchołków grafu.
+     * @return liczba wierzchołków grafu.
+     */
+    int rozmiar() const;
+
 private:
     int czasTransmisji(int wierzcholek, const PrzydzialZasobow &przydzial) const;
 };
