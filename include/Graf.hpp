@@ -21,6 +21,7 @@ class Graf {
 public:
     std::map<int, Info> m_wierzcholki;
     int iloscZasobow;
+    int przepustowosc;
 
     // funkcja pomocnicza
     void znajdzSciezki(std::vector<int> &sciezka, std::vector<std::vector<int>> &) const;

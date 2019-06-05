@@ -1,7 +1,3 @@
-//
-// Created by gosia on 29.05.19.
-//
-
 #ifndef WCZYTYWANIE_HPP
 #define WCZYTYWANIE_HPP
 
@@ -11,6 +7,11 @@
 
 class Wczytywanie {
 public:
+    /**
+     * Wczytuje graf z podanego strumienia plikowego
+     * @param input
+     * @return
+     */
     static Graf wczytaj(std::ifstream &input);
 };
 

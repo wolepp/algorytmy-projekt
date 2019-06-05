@@ -1,7 +1,3 @@
-//
-// Created by wojtek on 01.06.19.
-//
-
 #include "Wczytywanie.hpp"
 
 Graf Wczytywanie::wczytaj(std::ifstream &myfile) {
@@ -52,6 +48,10 @@ Graf Wczytywanie::wczytaj(std::ifstream &myfile) {
                         G.m_wierzcholki.find(i)->second.costs.push_back(x);
                     }
                 }
+            } else if (pierwsze == "@comm") {
+                int x;
+                std::string tmp;
+                myfile >> x >> tmp >> x >> G.przepustowosc;
             }
         }
         return G;
