@@ -24,9 +24,11 @@ Graf Wczytywanie::wczytaj(std::ifstream &myfile) {
                     for (int j = 0; j < size; j++) {
                         int t, x;
                         char y;
-
+                        Dziecko dziecko;
                         myfile >> t >> y >> x >> y;
-                        G.m_wierzcholki.find(i)->second.dzieci.push_back(t);
+                        dziecko.id = t;
+                        dziecko.waga = x;
+                        G.m_wierzcholki.find(i)->second.dzieci.push_back(dziecko);
                     }
                 }
             } else if (pierwsze == "@proc") {
