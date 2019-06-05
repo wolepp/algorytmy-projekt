@@ -1,3 +1,4 @@
+#include <math.h>
 #include "Graf.hpp"
 
 std::vector<int> znajdzMaxSciezke(const std::vector<std::vector<int>> &sciezki, std::map<int, int> wagi)
@@ -146,15 +147,18 @@ std::vector<int> Graf::numeryWierzcholkow() const {
     return v;
 }
 
+int wzorTC(int waga, int przepustowosc){
+    double tC = double (waga) / double (przepustowosc);
+    return ceil(tC);
+}
 
-
-int Graf::czasTransmisji(int wierzcholek, const PrzydzialZasobow &przydzial) {
+int Graf::czasTransmisji(int wierzcholek, const PrzydzialZasobow &przydzial) const{
     int temp = 0;
     int calkowityCzasTransmisji = 0;
     for (Dziecko i: m_wierzcholki.at(wierzcholek).dzieci) {
         temp = czasTransmisji(i.id, przydzial);
         if (przydzial.zasobZadania(wierzcholek) != przydzial.zasobZadania(i.id)) {
-            calkowityCzasTransmisji += 3;//wzor;
+            calkowityCzasTransmisji += wzorTC(i.waga, przepustowosc);
         }
         calkowityCzasTransmisji += temp;
     }
@@ -167,10 +171,7 @@ int Graf::czasWszytskichZadan(const PrzydzialZasobow &przydzial) const {
         int temp = przydzial.zasobZadania(i);
         calkowityCzas += m_wierzcholki.at(i).times.at(temp);
     }
-    for(int i: m_wierzcholki){
-       // rekurencyjnie dla każdego zwraca int
-    }
-    //toDO: czas trasmisji tc
+    calkowityCzas += czasTransmisji(m_wierzcholki.begin()->first, przydzial);
     return calkowityCzas;
 }
 

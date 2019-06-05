@@ -100,7 +100,7 @@ public:
     int kosztWszystkichZadan(const PrzydzialZasobow &przydzial) const;
 
 private:
-    int czasTransmisji(int wierzcholek, const PrzydzialZasobow &przydzial);
+    int czasTransmisji(int wierzcholek, const PrzydzialZasobow &przydzial) const;
 };
 
 #endif //GRAF_HPP
