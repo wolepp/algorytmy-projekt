@@ -40,8 +40,8 @@ std::vector<int> Graf::sciezkaNajdrozsza(const PrzydzialZasobow &przydzial) cons
 }
 
 void Graf::znajdzSciezki(std::vector<int> &sciezka, std::vector<std::vector<int>> &sciezki) const {
-    for (int dziecko: m_wierzcholki.at(sciezka.back()).dzieci) {
-        sciezka.push_back(dziecko);
+    for (Dziecko dziecko: m_wierzcholki.at(sciezka.back()).dzieci) {
+        sciezka.push_back(dziecko.id);
         znajdzSciezki(sciezka, sciezki);
     }
     if (m_wierzcholki.at(sciezka.back()).dzieci.empty()) {
