@@ -9,6 +9,10 @@ struct Parametry {
     int epsilon;
     int c;
     int t;
+    double P_gen1;
+    double P_gen2;
+    double P_gen3;
+    double P_gen4;
 };
 
 class Interfejs {

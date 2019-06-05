@@ -6,7 +6,16 @@ project(glowny)
 #dołącz folder z plikami nagłówkowymi
 include_directories(include)
 #dodaj pliki źródłowe do projektu
-add_executable(glowny src/main.cpp src/Drzewo.cpp src/Graf.cpp src/Node.cpp src/PrzydzialZasobow.cpp src/Wczytywanie.cpp include/Random.cpp include/Random.hpp)
+add_executable(glowny
+        src/main.cpp
+        src/Drzewo.cpp
+        src/Graf.cpp
+        src/Node.cpp
+        src/PrzydzialZasobow.cpp
+        src/Wczytywanie.cpp
+        src/Interfejs.cpp
+        src/Random.cpp
+        )
 
 #projekty do testowania (własne, można dodawać)
 project(wojtek)
