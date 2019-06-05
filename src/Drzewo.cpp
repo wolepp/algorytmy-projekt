@@ -59,10 +59,15 @@ PrzydzialZasobow Drzewo::fenotyp(const Graf &graf) {
 }
 
 Node *Drzewo::znajdzWezel(int id) {
-    return m_root->znajdzWezel(id);
+    if (m_root != nullptr) {
+        return m_root->znajdzWezel(id);
+    }
+    return nullptr;
 }
 
 int Drzewo::size() {
-    //todo: implementacja xD
-    return 5;
+    if (m_root != nullptr) {
+        return m_root->rozmiarPoddrzewa();
+    }
+    return 0;
 }

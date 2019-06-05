@@ -52,6 +52,8 @@ public:
      */
     int id();
 
+    int rozmiarPoddrzewa();
+
 private:
     int m_id;
     std::vector<Node*> m_dzieci;

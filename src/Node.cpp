@@ -52,3 +52,11 @@ int Node::id() {
 std::vector<Node*> Node::dzieci() {
     return m_dzieci;
 }
+
+int Node::rozmiarPoddrzewa() {
+    int rozmiar = 0;
+    for (auto dziecko: m_dzieci) {
+        rozmiar += dziecko->rozmiarPoddrzewa();
+    }
+    return rozmiar + 1;
+}
