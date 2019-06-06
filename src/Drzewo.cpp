@@ -1,19 +1,10 @@
 #include "Drzewo.hpp"
-
-#include <random>
+#include "Random.hpp"
 
 typedef void (Graf::*funkcjaGenu)(PrzydzialZasobow&) const;
 
-/**
- * Zwraca losową liczbę całkowitą z przedziału [min, max].
- * @param min początek przedziału - zawiera się w
- * @param max koniec przedziału - zawiera się w
- * @return losowa liczba
- */
-int rand_int(int min, int max);
-
 funkcjaGenu losowyGen() {
-    switch (rand_int(0, 3)) {
+    switch (Random::losujInt(0, 3)) {
         case 0:
             return &Graf::najtanszaNajdrozszaSciezka;
         case 1:
@@ -42,7 +33,7 @@ Drzewo Drzewo::losowyGenotyp(int liczbaWezlow) {
     Drzewo d;
     d.m_root = new Node(0);
     for (int i = 0; i < liczbaWezlow; i++) {
-        Node *tmp = d.m_root->znajdzWezel(rand_int(0, i));
+        Node *tmp = d.m_root->znajdzWezel(Random::losujInt(0, i));
         tmp->dodajDziecko(i+1);
         tmp->m_gen = losowyGen();
     }
