@@ -85,3 +85,20 @@ Rozwiazania krzyzowanie(Rozwiazania &osobniki, int liczba) {
     
     return noweRozwiazania;
 }
+
+Rozwiazania selekcja(Rozwiazania &pokolenie, int liczba) {
+
+    return Rozwiazania();
+}
+
+Rozwiazania mutacja(Rozwiazania &pokolenie, int liczba) {
+    Rozwiazania R = pokolenie;
+
+    for(int i=0; i<pokolenie.size(); i++){
+        R[i]->operatorMutacji();
+    }
+
+    return R;
+}
+
+
