@@ -6,6 +6,13 @@ Node::Node(const Node &node) : Node(node.m_id) {
     kopiujDzieci(node);
 }
 
+Node::~Node() {
+    for (Node* dziecko: m_dzieci) {
+        delete dziecko;
+    }
+    delete this;
+}
+
 void Node::kopiujDzieci(const Node &stad) {
     for (Node *dziecko: stad.m_dzieci) {
         dodajDziecko(dziecko->m_id)->kopiujDzieci(*dziecko);
@@ -60,3 +67,4 @@ int Node::rozmiarPoddrzewa() {
     }
     return rozmiar + 1;
 }
+

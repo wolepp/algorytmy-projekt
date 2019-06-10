@@ -5,38 +5,55 @@
 Parametry pobierzWszystkieParametry() {
     Parametry parametry;
 
-    std::cout << "Podaj parametr alfa";
-    std::cin >> parametry.alfa;
+    // alfa
+    do {
+        std::cout << "Podaj parametr alfa";
+        std::cin >> parametry.alfa;
+    } while (parametry.alfa < 1);
+
+    // maksymalny czas wykonania rozwiązania
+    do {
+        std::cout << "Podaj maksymalny czas wykonania zadania: ";
+        std::cin >> parametry.maksymalnyCzas;
+    } while (parametry.maksymalnyCzas <= 0);
+
+    // beta, gamma, delta
     do {
         std::cout << "Podaj parametr beta";
         std::cin >> parametry.beta;
-    }while(parametry.beta > 1 || parametry.beta < 0);
+    } while (parametry.beta >= 1 || parametry.beta < 0);
     do {
         std::cout << "Podaj parametr gamma";
         std::cin >> parametry.gamma;
-    }while(parametry.beta + parametry.gamma > 1 || parametry.beta + parametry.gamma < 0);
+    } while (parametry.beta + parametry.gamma > 1 || parametry.gamma < 0);
     parametry.delta = 1 - (parametry.alfa + parametry.beta + parametry.gamma);
+
+    // epsilon
     do {
         std::cout << "Podaj parametr epsilon";
         std::cin >> parametry.epsilon;
-    }while(parametry.epsilon < 1);
+    } while (parametry.epsilon < 1);
+
+    // c, t
     std::cout << "Podaj parametr c";
     std::cin >> parametry.c;
     std::cout << "Podaj parametr t";
     std::cin >> parametry.t;
+
+    // prawdopodobieństwa genów
     do {
         std::cout << "Podaj parametr prawdopodobieństwa genu 1";
         std::cin >> parametry.P_gen1;
-    }while(parametry.P_gen1 > 1 || parametry.P_gen1 < 0);
+    } while (parametry.P_gen1 > 1 || parametry.P_gen1 < 0);
     do {
         std::cout << "Podaj parametr prawdopodobieństwa genu 2";
         std::cin >> parametry.P_gen2;
-    }while(parametry.P_gen1 + parametry.P_gen2 > 1 || parametry.P_gen1 + parametry.P_gen2 < 0);
+    } while (parametry.P_gen1 + parametry.P_gen2 > 1 || parametry.P_gen2 < 0);
     do {
         std::cout << "Podaj parametr prawdopodobieństwa genu 3";
         std::cin >> parametry.P_gen3;
-    }while(parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 > 1
-            || parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 < 0);
+    } while (parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 > 1
+             || parametry.P_gen3 < 0);
     parametry.P_gen4 = 1 - (parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3);
 
     return parametry;
@@ -68,34 +85,31 @@ void poprawParametr(Parametry &parametry, char parametr) {
             do {
                 std::cout << "beta = ";
                 std::cin >> parametry.beta;
-            }while(parametry.beta + parametry.gamma + parametry.delta > 1
-                    || parametry.beta + parametry.gamma + parametry.delta < 0);
-            parametry.delta = 1 - (parametry.beta + parametry.gamma);
+            } while (parametry.beta + parametry.gamma + parametry.delta > 1
+                     || parametry.beta < 0);
             break;
         case 'g':
         case 'G':
             do {
                 std::cout << "gamma = ";
                 std::cin >> parametry.gamma;
-            }while(parametry.beta + parametry.gamma + parametry.delta > 1
-                    || parametry.beta + parametry.gamma + parametry.delta < 0);
-            parametry.delta = 1 - (parametry.beta + parametry.gamma);
+            } while (parametry.beta + parametry.gamma + parametry.delta > 1
+                     || parametry.gamma < 0);
             break;
         case 'd':
         case 'D':
-            do{
-            std::cout << "delta = ";
-            std::cin >> parametry.alfa;
-            }while(parametry.beta + parametry.gamma + parametry.delta > 1
-                    || parametry.beta + parametry.gamma + parametry.delta < 0);
-            parametry.beta = 1 - (parametry.delta + parametry.gamma);
+            do {
+                std::cout << "delta = ";
+                std::cin >> parametry.alfa;
+            } while (parametry.beta + parametry.gamma + parametry.delta > 1
+                     || parametry.delta < 0);
             break;
         case 'e':
         case 'E':
             do {
                 std::cout << "epsilon = ";
                 std::cin >> parametry.epsilon;
-            }while(parametry.epsilon < 1);
+            } while (parametry.epsilon < 1);
             break;
         case 'c':
         case 'C':
@@ -111,60 +125,63 @@ void poprawParametr(Parametry &parametry, char parametr) {
             do {
                 std::cout << "Prawdopodobieństwo genu 1 = ";
                 std::cin >> parametry.P_gen1;
-            }while(parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 > 1
-                   || parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 < 0);
-            parametry.P_gen4 = 1 - (parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3);
+            } while (parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 > 1
+                     || parametry.P_gen1 < 0);
             break;
         case '2':
-            do{
-            std::cout << "Prawdopodoieństwo genu 2 = ";
-            std::cin >> parametry.P_gen2;
-            }while(parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 > 1
-                   || parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 < 0);
-            parametry.P_gen4 = 1 - (parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3);
+            do {
+                std::cout << "Prawdopodoieństwo genu 2 = ";
+                std::cin >> parametry.P_gen2;
+            } while (parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 > 1
+                     || parametry.P_gen2 < 0);
             break;
         case '3':
-            do{
+            do {
                 std::cout << "Prawdopodobieństwo genu 3 = ";
                 std::cin >> parametry.P_gen3;
-            }while(parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 > 1
-                    || parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 < 0);
-            parametry.P_gen4 = 1 - (parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3);
+            } while (parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 > 1
+                     || parametry.P_gen3 < 0);
             break;
         case '4':
-            do{
+            do {
                 std::cout << "Prawdopodobieństwo genu 4 = ";
                 std::cin >> parametry.P_gen4;
-            }while(parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 > 1
-                    || parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 < 0);
-            parametry.P_gen1 = 1 - (parametry.P_gen4 + parametry.P_gen2 + parametry.P_gen3);
+            } while (parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 > 1
+                     || parametry.P_gen4 < 0);
             break;
+        case 'm':
+        case 'M':
+            do {
+                std::cout << "Maksymalny czas wykonania rozwiazania: ";
+                std::cin >> parametry.maksymalnyCzas;
+            } while (parametry.maksymalnyCzas <= 0);
+        default:
+            std::cout << "Nie ma takiego parametru!\n";
     }
 }
 
-char poprawParametry(Parametry &parametry) {
-    char ch = 'x';
-    do {
-        std::cout << "Czy poprawić któryś z parametrów? t/N";
-        std::cin >> ch;
-        if (ch == 't') {
-            std::cout << "Podaj parametr do poprawy:\ta - alfa\tb - beta\tg - gamma\td - delta\te - epsilon\t"
-                         "c\tt\t1 - prawdopodobieństwo genu 1\t2 - prawdopodobieństwo genu 2\t"
-                         "3 - prawdopodobienstwo genu 3\t4 - prawdopodobieństwo genu 4" << std::endl;
-            std::cin >> ch;
-            poprawParametr(parametry, ch);
-        }
-    }while(ch == 'N');
+void poprawParametry(Parametry &parametry) {
+    char ch;
+    std::cout << "Podaj parametr do poprawy:\na - alfa\nb - beta\ng - gamma\nd - delta\ne - epsilon\n"
+                 "c\nt\n1 - prawdopodobieństwo genu 1\n2 - prawdopodobieństwo genu 2\n"
+                 "3 - prawdopodobienstwo genu 3\n4 - prawdopodobieństwo genu 4\n"
+                 "m - maksymalny czas wykonania zadania" << std::endl;
+    std::cin >> ch;
+    poprawParametr(parametry, ch);
 }
 
 Parametry Interfejs::pobierzParametry() {
-    m_parametry = pobierzWszystkieParametry();
-    wyswietlParametry(m_parametry);
-    char ch = 'x';
-    ch = poprawParametry(m_parametry);
-    while (ch != 'q') {
-        ch = poprawParametry(m_parametry);
-        wyswietlParametry(m_parametry);
+    Parametry parametry;
+    parametry = pobierzWszystkieParametry();
+    char ch;
+    wyswietlParametry(parametry);
+    std::cout << "Poprawić parametry? t/N";
+    std::cin >> ch;
+    while (ch == 't') {
+        poprawParametry(parametry);
+        wyswietlParametry(parametry);
+        std::cout << "Poprawić parametry? t/N";
+        std::cin >> ch;
     }
-    return m_parametry;
+    return parametry;
 }

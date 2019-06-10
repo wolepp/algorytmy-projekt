@@ -18,6 +18,7 @@ public:
     Node() = default;
     explicit Node(int);
     Node(const Node &node);
+    ~Node();
 
     /**
      * Znajduje węzeł o podanym id.

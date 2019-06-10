@@ -19,6 +19,7 @@ public:
     Drzewo() = default;
     explicit Drzewo(PrzydzialZasobow &p) : m_embrion{p} {};
     Drzewo(const Drzewo& d);
+    ~Drzewo();
 
     /**
      * Przypisuje embrion na zadany przydzialZasobow
@@ -49,16 +50,10 @@ public:
     /**
      * Zmienia w losowym węźle gen na inny losowo wybrany.
      */
-     //TODO: Radosław
     void operatorMutacji();
-    /* przydatne funkcje:
-     *  rand_int(min, max) - jest w Drzewo.cpp, więc luzik
-     *  m_root.znajdzWezel( rand_int(1, size() )) - losowy węzeł, z wyłączeniem korzenia
-     *  losowyGen() - zwraca funkcjaGenu, i to wstawiasz do tego węzła.m_gen; tylko sprawdź
-     *      czy nie wylosował ci się ten sam :P
-     */
 
     static Drzewo losowyGenotyp(); // liczbaWezlow = 10
+
     /**
      * Zwraca Drzewo zbudowane w sposób losowy.
      * W korzeniu drzewa jest embrion, również wygenerowany w sposób losowy

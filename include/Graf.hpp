@@ -90,7 +90,7 @@ public:
      * @param przydzial według którego obliczany jest czas
      * @return czas zadań
      */
-    int czasWszytskichZadan(const PrzydzialZasobow &przydzial) const;
+    int czasZadanNaSciezceKrytycznej(const PrzydzialZasobow &przydzial) const;
 
     /**
      * Zwraca koszt wykonania wszystkich zadań.

@@ -20,7 +20,10 @@ add_executable(glowny
 #projekty do testowania (własne, można dodawać)
 project(wojtek)
 #dodaj wybrane pliki źródłowe do własnego projektu do testowania
-add_executable(wojtek src/wojtek.cpp)
+add_executable(wojtek
+        src/wojtek.cpp
+        src/Random.cpp
+        )
 
 project(gosia)
 add_executable(gosia src/main.cpp)

@@ -165,7 +165,7 @@ int Graf::czasTransmisji(int wierzcholek, const PrzydzialZasobow &przydzial) con
     return calkowityCzasTransmisji;
 }
 
-int Graf::czasWszytskichZadan(const PrzydzialZasobow &przydzial) const {
+int Graf::czasZadanNaSciezceKrytycznej(const PrzydzialZasobow &przydzial) const {
     int calkowityCzas = 0;
     for(int i: sciezkaKrytyczna(przydzial)){
         int temp = przydzial.zasobZadania(i);
