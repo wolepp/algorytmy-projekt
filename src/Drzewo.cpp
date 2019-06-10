@@ -1,6 +1,7 @@
 #include "Drzewo.hpp"
 #include "Random.hpp"
 
+// funkcjaGenu to wskaźnik na metodę klasy Graf, której parametrem jest referencja do PrzydzialZasobow
 typedef void (Graf::*funkcjaGenu)(PrzydzialZasobow&) const;
 
 funkcjaGenu losowyGen() {
@@ -70,16 +71,11 @@ int Drzewo::size() {
 }
 
 void Drzewo::operatorMutacji() {
-
-    Drzewo d;
-    d.m_root = new Node(0);
-        Node *tmp = d.m_root->znajdzWezel(Random::losujInt(1, size()));
-        Node *tmp2 = tmp;
-
-        while(tmp->m_gen==tmp2->m_gen)
-            tmp->m_gen = losowyGen();
-
-        //Dobrze to? Chyba nie XD Ale średnio ogarniam co tu sie odpiernicza :/
-
-
+    auto mutowanyWezel = znajdzWezel(Random::losujInt(1, size()-1));
+    funkcjaGenu obecnyGen = mutowanyWezel->m_gen;
+    funkcjaGenu nowyGen = losowyGen();
+    while (nowyGen == obecnyGen) {
+        nowyGen = losowyGen();
+    }
+    mutowanyWezel->m_gen = nowyGen;
 }
