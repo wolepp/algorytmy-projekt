@@ -1,6 +1,9 @@
 #include "PrzydzialZasobow.hpp"
 #include "Random.hpp"
 
+#include <iostream>
+#include <iomanip>
+
 void PrzydzialZasobow::przydzielZasobZadaniu(int zasob, int zadanie) {
     m_przydzial[zadanie] = zasob;
 }
@@ -62,4 +65,13 @@ int PrzydzialZasobow::getWartoscFunkcjiDopasowania() const {
 
 void PrzydzialZasobow::setWartoscFunkcjiDopasowania(int wartosc) {
     PrzydzialZasobow::wartoscFunkcjiDopasowania = wartosc;
+}
+
+std::ostream& operator<<(std::ostream& stream, const PrzydzialZasobow& przydzial) {
+    stream << std::setw(7) << "zadanie" << std::setw(8) << "zasób" << std::endl;
+    for (const auto& wpis: przydzial.m_przydzial) {
+        stream << std::setw(7) << wpis.first << std::setw(7) << wpis.second << std::endl;
+    }
+
+    return stream;
 }

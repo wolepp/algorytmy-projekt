@@ -10,6 +10,13 @@
 
 #include <vector>
 
+struct P_geny {
+    double g1;
+    double g2;
+    double g3;
+    double g4;
+};
+
 class Drzewo {
 private:
     Node* m_root = nullptr;
@@ -50,9 +57,9 @@ public:
     /**
      * Zmienia w losowym węźle gen na inny losowo wybrany.
      */
-    void operatorMutacji();
+    void operatorMutacji(P_geny prawdopodobienstwa);
 
-    static Drzewo losowyGenotyp(); // liczbaWezlow = 10
+    static Drzewo losowyGenotyp(P_geny prawdopodobienstwo); // liczbaWezlow = 10
 
     /**
      * Zwraca Drzewo zbudowane w sposób losowy.
@@ -62,7 +69,7 @@ public:
      * @param liczbaWezlow określa liczbę węzłów budującą dane drzewo
      * @return losowe Drzewo o zadanej liczbie węzłów
      */
-    static Drzewo losowyGenotyp(int liczbaWezlow);
+    static Drzewo losowyGenotyp(int liczbaWezlow, P_geny prawdopodobienstwa);
 };
 
 

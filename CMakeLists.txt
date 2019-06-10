@@ -22,6 +22,7 @@ project(wojtek)
 #dodaj wybrane pliki źródłowe do własnego projektu do testowania
 add_executable(wojtek
         src/wojtek.cpp
+        src/PrzydzialZasobow.cpp
         src/Random.cpp
         )
 

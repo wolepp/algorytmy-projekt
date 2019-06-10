@@ -29,7 +29,7 @@ void funkcjaDopasowania(int c, int t, PrzydzialZasobow &przydzialZasobow, Graf &
  * @param liczbaRozwiazan liczba rozwiązań do zmutowania
  * @return Rozwiazania - nowa część pokolenia z mutacji
  */
-Rozwiazania mutacja(Rozwiazania &pokolenie, int liczbaRozwiazan);
+Rozwiazania mutacja(Rozwiazania &pokolenie, int liczbaRozwiazan, P_geny prawdopodobienstwaGenow);
 
 /**
  * Operator selekcji.
@@ -75,35 +75,57 @@ int main(int argc, char *argv[]) {
     const int FI = static_cast<int>(parametry.beta * PI);
     const int PSI = static_cast<int>(parametry.gamma * PI);
     const int OMEGA = static_cast<int>(parametry.delta * PI);
+    P_geny prawdGenow {parametry.P_gen1, parametry.P_gen2,
+                                    parametry.P_gen3, parametry.P_gen4};
 
     // generowanie pokolenia początkowego
     Rozwiazania pokoleniePoczatkowe;
     for (int i = 0; i < PI; i++) {
         // generuje drzewo o ilości węzłów między 5 a 15
-        Drzewo* drzewo = new Drzewo(Drzewo::losowyGenotyp(Random::losujInt(5, 15)));
+        Drzewo* drzewo = new Drzewo(Drzewo::losowyGenotyp(
+                Random::losujInt(5, 15),
+                prawdGenow));
         pokoleniePoczatkowe.push_back(drzewo);
     }
 
-    int minimumF = INT_MAX;
+    int minimumFD = INT_MAX;
     int pokoleniaBezLepszego = 0;
     Rozwiazania nowePokolenie;
     PrzydzialZasobow najlepszy;
     while (pokoleniaBezLepszego < parametry.epsilon) {
-        /*
-         * Utworzyć nowe pokolenie z operatorów działających na pokoleniu początkowym
-         * o rozmiarach danych FI, PSI i OMEGA.
-         *
-         * Sprawdzić czy spośród nich jest taki o mniejszej wartości funkcji dopasowania.
-         * Jeżeli nie ma, zwiększyć liczbę pokoleniaBezLepszego
-         * Jeżeli jest, wyzerować liczbę pokoleniaBezLepszego i przypisać najlepszy do zmiennej najlepszy
-         *
-         * Zdestruktować wszystkie drzewa w pokoleniePoczatkowe
-         *
-         * Przenieść z nowePokolenie do pokoleniePoczatkowe
-         *
-         * i lecimy od nowa
-         */
+        // generowanie rozwiązań
+        Rozwiazania zSelekcji = selekcja(pokoleniePoczatkowe, FI, graf);
+        Rozwiazania zKrzyzowania = krzyzowanie(pokoleniePoczatkowe, PSI);
+        Rozwiazania zMutacji = mutacja(pokoleniePoczatkowe, OMEGA, P_geny());
+
+        // zapisywanie
+        nowePokolenie.reserve(zSelekcji.size() + zKrzyzowania.size() + zMutacji.size());
+        nowePokolenie.insert(nowePokolenie.end(), zSelekcji.begin(), zSelekcji.end());
+        nowePokolenie.insert(nowePokolenie.end(), zKrzyzowania.begin(), zKrzyzowania.end());
+        nowePokolenie.insert(nowePokolenie.end(), zMutacji.begin(), zMutacji.end());
+
+        // szukanie najlepszego rozwiązania
+        for (auto rozwiazanie: nowePokolenie) {
+            int fd = rozwiazanie->fenotyp(graf).getWartoscFunkcjiDopasowania();
+            if (fd < minimumFD) {
+                fd = minimumFD;
+                pokoleniaBezLepszego = 0;
+                najlepszy = rozwiazanie->fenotyp(graf);
+            } else {
+                pokoleniaBezLepszego++;
+            }
+        }
+
+        for (auto rozwiazanie: pokoleniePoczatkowe) {
+            delete rozwiazanie;
+        }
+        // przeniesienie nowego pokolenia jako starego
+        pokoleniePoczatkowe.resize(nowePokolenie.size());
+        pokoleniePoczatkowe.insert(pokoleniePoczatkowe.end(), nowePokolenie.begin(), nowePokolenie.end());
     }
+
+    // wypisanie najlepszego przydziału zasobów
+    std::cout << najlepszy;
 
 
     return 0;
@@ -167,14 +189,14 @@ Rozwiazania selekcja(Rozwiazania &pokolenie, int liczbaRozwiazan, Graf &graf) {
     return R;
 }
 
-Rozwiazania mutacja(Rozwiazania &pokolenie, int liczbaRozwiazan) {
+Rozwiazania mutacja(Rozwiazania &pokolenie, int liczbaRozwiazan, P_geny prawdopodobienstwaGenow) {
     Rozwiazania R;
 
     for (int i = 0; i < liczbaRozwiazan; i++) {
         int indeks = Random::losujInt(0, pokolenie.size()-1);
         Drzewo* staryOsobnik = pokolenie[indeks];
         Drzewo* nowyOsobnik {staryOsobnik};
-        nowyOsobnik->operatorMutacji();
+        nowyOsobnik->operatorMutacji(P_geny());
         R.push_back(nowyOsobnik);
     }
 

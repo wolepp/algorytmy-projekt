@@ -7,7 +7,7 @@ Parametry pobierzWszystkieParametry() {
 
     // alfa
     do {
-        std::cout << "Podaj parametr alfa";
+        std::cout << "Podaj parametr alfa ";
         std::cin >> parametry.alfa;
     } while (parametry.alfa < 1);
 
@@ -19,38 +19,38 @@ Parametry pobierzWszystkieParametry() {
 
     // beta, gamma, delta
     do {
-        std::cout << "Podaj parametr beta";
+        std::cout << "Podaj parametr beta ";
         std::cin >> parametry.beta;
     } while (parametry.beta >= 1 || parametry.beta < 0);
     do {
-        std::cout << "Podaj parametr gamma";
+        std::cout << "Podaj parametr gamma ";
         std::cin >> parametry.gamma;
     } while (parametry.beta + parametry.gamma > 1 || parametry.gamma < 0);
-    parametry.delta = 1 - (parametry.alfa + parametry.beta + parametry.gamma);
+    parametry.delta = 1 - (parametry.beta + parametry.gamma);
 
     // epsilon
     do {
-        std::cout << "Podaj parametr epsilon";
+        std::cout << "Podaj parametr epsilon ";
         std::cin >> parametry.epsilon;
     } while (parametry.epsilon < 1);
 
     // c, t
-    std::cout << "Podaj parametr c";
+    std::cout << "Podaj parametr c ";
     std::cin >> parametry.c;
-    std::cout << "Podaj parametr t";
+    std::cout << "Podaj parametr t ";
     std::cin >> parametry.t;
 
     // prawdopodobieństwa genów
     do {
-        std::cout << "Podaj parametr prawdopodobieństwa genu 1";
+        std::cout << "Podaj parametr prawdopodobieństwa genu 1 ";
         std::cin >> parametry.P_gen1;
     } while (parametry.P_gen1 > 1 || parametry.P_gen1 < 0);
     do {
-        std::cout << "Podaj parametr prawdopodobieństwa genu 2";
+        std::cout << "Podaj parametr prawdopodobieństwa genu 2 ";
         std::cin >> parametry.P_gen2;
     } while (parametry.P_gen1 + parametry.P_gen2 > 1 || parametry.P_gen2 < 0);
     do {
-        std::cout << "Podaj parametr prawdopodobieństwa genu 3";
+        std::cout << "Podaj parametr prawdopodobieństwa genu 3 ";
         std::cin >> parametry.P_gen3;
     } while (parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 > 1
              || parametry.P_gen3 < 0);

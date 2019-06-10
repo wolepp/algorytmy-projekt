@@ -10,7 +10,6 @@ Node::~Node() {
     for (Node* dziecko: m_dzieci) {
         delete dziecko;
     }
-    delete this;
 }
 
 void Node::kopiujDzieci(const Node &stad) {

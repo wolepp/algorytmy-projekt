@@ -4,23 +4,20 @@
 // funkcjaGenu to wskaźnik na metodę klasy Graf, której parametrem jest referencja do PrzydzialZasobow
 typedef void (Graf::*funkcjaGenu)(PrzydzialZasobow&) const;
 
-funkcjaGenu losowyGen() {
-    switch (Random::losujInt(0, 3)) {
-        case 0:
-            return &Graf::najtanszaNajdrozszaSciezka;
-        case 1:
-            return &Graf::najszybszaSciezkaKrytyczna;
-        case 2:
-            return &Graf::najmniejszeTK;
-        case 3:
-            return &Graf::najmniejObciazonyZasob;
+funkcjaGenu losowyGen(P_geny pG) {
+    double rand = Random::losujDouble(0, 1);
+    if (rand < pG.g1) {
+        return &Graf::najtanszaNajdrozszaSciezka;
+    } else if (rand < pG.g1 + pG.g2) {
+        return &Graf::najszybszaSciezkaKrytyczna;
+    } else if (rand < pG.g1 + pG.g2 + pG.g3) {
+        return &Graf::najmniejszeTK;
+    } else {
+        return &Graf::najmniejObciazonyZasob;
     }
-    return nullptr;
 }
 
-Drzewo::Drzewo(const Drzewo& drzewo) : m_embrion{drzewo.m_embrion} {
-    m_root = new Node(*drzewo.m_root);
-}
+Drzewo::Drzewo(const Drzewo& drzewo) : m_embrion{drzewo.m_embrion}, m_root{new Node(*drzewo.m_root)} {}
 
 Drzewo::~Drzewo() {
     delete m_root;
@@ -30,18 +27,19 @@ void Drzewo::ustawEmbrion(PrzydzialZasobow p) {
     m_embrion = p;
 }
 
-Drzewo Drzewo::losowyGenotyp() {
-    return losowyGenotyp(10);
+Drzewo Drzewo::losowyGenotyp(P_geny prawdopodobienstwo) {
+    return losowyGenotyp(10, prawdopodobienstwo);
 }
 
-Drzewo Drzewo::losowyGenotyp(int liczbaWezlow) {
+Drzewo Drzewo::losowyGenotyp(int liczbaWezlow, P_geny prawdopodobienstwa) {
     Drzewo d;
     d.m_root = new Node(0);
     for (int i = 0; i < liczbaWezlow; i++) {
         Node *tmp = d.m_root->znajdzWezel(Random::losujInt(0, i));
-        tmp->dodajDziecko(i+1);
-        tmp->m_gen = losowyGen();
+        Node* dziecko = tmp->dodajDziecko(i+1);
+        dziecko->m_gen = losowyGen(prawdopodobienstwa);
     }
+    //TODO: wygenerować embrion xD
     return d;
 }
 
@@ -74,12 +72,12 @@ int Drzewo::size() {
     return 0;
 }
 
-void Drzewo::operatorMutacji() {
+void Drzewo::operatorMutacji(P_geny prawdopodobienstwa) {
     auto mutowanyWezel = znajdzWezel(Random::losujInt(1, size()-1));
     funkcjaGenu obecnyGen = mutowanyWezel->m_gen;
-    funkcjaGenu nowyGen = losowyGen();
+    funkcjaGenu nowyGen = losowyGen(prawdopodobienstwa);
     while (nowyGen == obecnyGen) {
-        nowyGen = losowyGen();
+        nowyGen = losowyGen(prawdopodobienstwa);
     }
     mutowanyWezel->m_gen = nowyGen;
 }

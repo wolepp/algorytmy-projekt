@@ -3,6 +3,7 @@
 
 #include <map>
 #include <vector>
+#include <ostream>
 
 class PrzydzialZasobow {
 private:
@@ -61,6 +62,8 @@ public:
     static PrzydzialZasobow losowyPrzydzial(int iloscZadan, int iloscZasobow);
     static PrzydzialZasobow losowyPrzydzial(const std::vector<int>& zadania, int iloscZasobow);
     static PrzydzialZasobow losowyPrzydzial(int iloscZadan, const std::vector<int>& zasoby);
+
+    friend std::ostream& operator<<(std::ostream& stream, const PrzydzialZasobow& przydzial);
 
 };
 
