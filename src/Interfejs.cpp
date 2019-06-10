@@ -70,6 +70,7 @@ void poprawParametr(Parametry &parametry, char parametr) {
                 std::cin >> parametry.beta;
             }while(parametry.beta + parametry.gamma + parametry.delta > 1
                     || parametry.beta + parametry.gamma + parametry.delta < 0);
+            parametry.delta = 1 - (parametry.beta + parametry.gamma);
             break;
         case 'g':
         case 'G':
@@ -78,6 +79,7 @@ void poprawParametr(Parametry &parametry, char parametr) {
                 std::cin >> parametry.gamma;
             }while(parametry.beta + parametry.gamma + parametry.delta > 1
                     || parametry.beta + parametry.gamma + parametry.delta < 0);
+            parametry.delta = 1 - (parametry.beta + parametry.gamma);
             break;
         case 'd':
         case 'D':
@@ -86,6 +88,7 @@ void poprawParametr(Parametry &parametry, char parametr) {
             std::cin >> parametry.alfa;
             }while(parametry.beta + parametry.gamma + parametry.delta > 1
                     || parametry.beta + parametry.gamma + parametry.delta < 0);
+            parametry.beta = 1 - (parametry.delta + parametry.gamma);
             break;
         case 'e':
         case 'E':
@@ -110,6 +113,7 @@ void poprawParametr(Parametry &parametry, char parametr) {
                 std::cin >> parametry.P_gen1;
             }while(parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 > 1
                    || parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 < 0);
+            parametry.P_gen4 = 1 - (parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3);
             break;
         case '2':
             do{
@@ -117,6 +121,7 @@ void poprawParametr(Parametry &parametry, char parametr) {
             std::cin >> parametry.P_gen2;
             }while(parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 > 1
                    || parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 < 0);
+            parametry.P_gen4 = 1 - (parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3);
             break;
         case '3':
             do{
@@ -124,6 +129,7 @@ void poprawParametr(Parametry &parametry, char parametr) {
                 std::cin >> parametry.P_gen3;
             }while(parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 > 1
                     || parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 < 0);
+            parametry.P_gen4 = 1 - (parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3);
             break;
         case '4':
             do{
@@ -131,6 +137,7 @@ void poprawParametr(Parametry &parametry, char parametr) {
                 std::cin >> parametry.P_gen4;
             }while(parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 > 1
                     || parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 < 0);
+            parametry.P_gen1 = 1 - (parametry.P_gen4 + parametry.P_gen2 + parametry.P_gen3);
             break;
     }
 }
