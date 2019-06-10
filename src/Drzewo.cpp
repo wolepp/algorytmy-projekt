@@ -22,6 +22,10 @@ Drzewo::Drzewo(const Drzewo& drzewo) : m_embrion{drzewo.m_embrion} {
     m_root = new Node(*drzewo.m_root);
 }
 
+Drzewo::~Drzewo() {
+    delete m_root;
+}
+
 void Drzewo::ustawEmbrion(PrzydzialZasobow p) {
     m_embrion = p;
 }

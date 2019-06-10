@@ -3,12 +3,13 @@
 
 struct Parametry {
     int alfa;
-    double beta;
-    double gamma;
-    double delta;
     int epsilon;
     int c;
     int t;
+    int maksymalnyCzas;
+    double beta;
+    double gamma;
+    double delta;
     double P_gen1;
     double P_gen2;
     double P_gen3;
@@ -17,11 +18,7 @@ struct Parametry {
 
 class Interfejs {
 public:
-    Parametry pobierzParametry();
-
-private:
-    Parametry m_parametry;
-
+    static Parametry pobierzParametry();
 };
 
 

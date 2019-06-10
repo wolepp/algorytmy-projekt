@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <climits>
 
 #include "Wczytywanie.hpp"
 #include "Drzewo.hpp"
@@ -51,6 +52,7 @@ Rozwiazania krzyzowanie(Rozwiazania &osobniki, int liczbaRozwiazan);
 
 int main(int argc, char *argv[]) {
 
+    // otworzenie pliku i wczytanie grafu
     std::ifstream input;
     std::string filename;
     if (argc == 1) {
@@ -60,10 +62,48 @@ int main(int argc, char *argv[]) {
         filename = argv[1];
     }
     input.open(filename);
+    if (!input.good()) {
+        std::cout << "Błąd pliku";
+        return -1;
+    }
     Graf graf = Wczytywanie::wczytaj(input);
     input.close();
-    Interfejs interfejs;
-    Parametry parametry = interfejs.pobierzParametry();
+
+    // pobranie parametrów od użytkownika
+    Parametry parametry = Interfejs::pobierzParametry();
+    const int PI = static_cast<int>(parametry.alfa * graf.rozmiar() * graf.iloscZasobow);
+    const int FI = static_cast<int>(parametry.beta * PI);
+    const int PSI = static_cast<int>(parametry.gamma * PI);
+    const int OMEGA = static_cast<int>(parametry.delta * PI);
+
+    // generowanie pokolenia początkowego
+    Rozwiazania pokoleniePoczatkowe;
+    for (int i = 0; i < PI; i++) {
+        // generuje drzewo o ilości węzłów między 5 a 15
+        Drzewo* drzewo = new Drzewo(Drzewo::losowyGenotyp(Random::losujInt(5, 15)));
+        pokoleniePoczatkowe.push_back(drzewo);
+    }
+
+    int minimumF = INT_MAX;
+    int pokoleniaBezLepszego = 0;
+    Rozwiazania nowePokolenie;
+    PrzydzialZasobow najlepszy;
+    while (pokoleniaBezLepszego < parametry.epsilon) {
+        /*
+         * Utworzyć nowe pokolenie z operatorów działających na pokoleniu początkowym
+         * o rozmiarach danych FI, PSI i OMEGA.
+         *
+         * Sprawdzić czy spośród nich jest taki o mniejszej wartości funkcji dopasowania.
+         * Jeżeli nie ma, zwiększyć liczbę pokoleniaBezLepszego
+         * Jeżeli jest, wyzerować liczbę pokoleniaBezLepszego i przypisać najlepszy do zmiennej najlepszy
+         *
+         * Zdestruktować wszystkie drzewa w pokoleniePoczatkowe
+         *
+         * Przenieść z nowePokolenie do pokoleniePoczatkowe
+         *
+         * i lecimy od nowa
+         */
+    }
 
 
     return 0;

@@ -19,8 +19,7 @@ public:
     Drzewo() = default;
     explicit Drzewo(PrzydzialZasobow &p) : m_embrion{p} {};
     Drzewo(const Drzewo& d);
-    //todo:
-    //~Drzewo();
+    ~Drzewo();
 
     /**
      * Przypisuje embrion na zadany przydzialZasobow
