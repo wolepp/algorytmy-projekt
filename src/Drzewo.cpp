@@ -68,3 +68,18 @@ int Drzewo::size() {
     }
     return 0;
 }
+
+void Drzewo::operatorMutacji() {
+
+    Drzewo d;
+    d.m_root = new Node(0);
+        Node *tmp = d.m_root->znajdzWezel(Random::losujInt(1, size()));
+        Node *tmp2 = tmp;
+
+        while(tmp->m_gen==tmp2->m_gen)
+            tmp->m_gen = losowyGen();
+
+        //Dobrze to? Chyba nie XD Ale średnio ogarniam co tu sie odpiernicza :/
+
+
+}
