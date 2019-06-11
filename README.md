@@ -25,10 +25,20 @@ Program kończy działanie, gdy w epsilon kolejnych pokoleniach nie ma lepszego 
 dla którego funkcja dopasowania będzie miała najmniejszą wartość.
 
 ## Użycie
-Kompilacja
+##### Kompilacja
 ```
-
+cmake CMakeLists.txt
+make
 ```
+##### Uruchomienie
+```console
+./szeregowanieZadan [plik z grafem]
+```
+lub
+```console
+./szeregowanieZadan
+```
+Druga opcja pyta o plik z grafem.
 
 ## Autorzy
 * **Aleksandra Chrzanowska**
