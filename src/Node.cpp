@@ -2,7 +2,12 @@
 
 Node::Node(int id) : m_id{id} { }
 
-Node::Node(const Node &node) : Node(node.m_id) {
+Node::Node(const Node &node) : m_id{node.m_id} {
+    if (node.m_gen == nullptr) {
+        m_gen = nullptr;
+    } else {
+        m_gen = node.m_gen;
+    }
     kopiujDzieci(node);
 }
 
@@ -14,7 +19,9 @@ Node::~Node() {
 
 void Node::kopiujDzieci(const Node &stad) {
     for (Node *dziecko: stad.m_dzieci) {
-        dodajDziecko(dziecko->m_id)->kopiujDzieci(*dziecko);
+        Node* nowy = dodajDziecko(dziecko->m_id);
+        nowy->m_gen = dziecko->m_gen;
+        nowy->kopiujDzieci(*dziecko);
     }
 }
 

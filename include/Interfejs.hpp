@@ -4,9 +4,8 @@
 struct Parametry {
     int alfa;
     int epsilon;
-    int c;
-    int t;
-    int maksymalnyCzas;
+    double c;
+    double t;
     double beta;
     double gamma;
     double delta;

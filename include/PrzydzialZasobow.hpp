@@ -8,7 +8,6 @@
 class PrzydzialZasobow {
 private:
     std::map<int, int> m_przydzial;
-    int wartoscFunkcjiDopasowania;
 
 public:
     /**
@@ -31,18 +30,6 @@ public:
      * @return numery zadań, do których przydzielony jest zasob
      */
     std::vector<int> zadaniaZasobu(int zasob) const;
-
-    /**
-     * Zwraca wartość funkcji dopasowania dla tego osobnika.
-     * @return wartość funkcji dopasowania
-     */
-    int getWartoscFunkcjiDopasowania() const;
-
-    /**
-     * Ustawia wartość funkcji dopasowania dla tego osobnika.
-     * @param wartosc
-     */
-    void setWartoscFunkcjiDopasowania(int wartosc);
 
     /**
      * Generuje losowe rozwiązanie.

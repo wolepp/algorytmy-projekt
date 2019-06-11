@@ -23,6 +23,8 @@ private:
     PrzydzialZasobow m_embrion;
 
 public:
+    double wartoscFunkcjiDopasowania = 0;
+
     Drzewo() = default;
     explicit Drzewo(PrzydzialZasobow &p) : m_embrion{p} {};
     Drzewo(const Drzewo& d);
@@ -59,8 +61,6 @@ public:
      */
     void operatorMutacji(P_geny prawdopodobienstwa);
 
-    static Drzewo losowyGenotyp(P_geny prawdopodobienstwo); // liczbaWezlow = 10
-
     /**
      * Zwraca Drzewo zbudowane w sposób losowy.
      * W korzeniu drzewa jest embrion, również wygenerowany w sposób losowy
@@ -69,7 +69,7 @@ public:
      * @param liczbaWezlow określa liczbę węzłów budującą dane drzewo
      * @return losowe Drzewo o zadanej liczbie węzłów
      */
-    static Drzewo losowyGenotyp(int liczbaWezlow, P_geny prawdopodobienstwa);
+    static Drzewo losowyGenotyp(int liczbaWezlow, P_geny prawdopodobienstwa, const Graf &graf);
 };
 
 

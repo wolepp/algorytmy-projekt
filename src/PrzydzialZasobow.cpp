@@ -59,14 +59,6 @@ PrzydzialZasobow PrzydzialZasobow::losowyPrzydzial(const std::vector<int>& zadan
     return przydzialZasobow;
 }
 
-int PrzydzialZasobow::getWartoscFunkcjiDopasowania() const {
-    return wartoscFunkcjiDopasowania;
-}
-
-void PrzydzialZasobow::setWartoscFunkcjiDopasowania(int wartosc) {
-    PrzydzialZasobow::wartoscFunkcjiDopasowania = wartosc;
-}
-
 std::ostream& operator<<(std::ostream& stream, const PrzydzialZasobow& przydzial) {
     stream << std::setw(7) << "zadanie" << std::setw(8) << "zasób" << std::endl;
     for (const auto& wpis: przydzial.m_przydzial) {

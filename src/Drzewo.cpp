@@ -17,7 +17,9 @@ funkcjaGenu losowyGen(P_geny pG) {
     }
 }
 
-Drzewo::Drzewo(const Drzewo& drzewo) : m_embrion{drzewo.m_embrion}, m_root{new Node(*drzewo.m_root)} {}
+Drzewo::Drzewo(const Drzewo& drzewo) : m_embrion{drzewo.m_embrion} {
+    m_root = new Node(*drzewo.m_root);
+}
 
 Drzewo::~Drzewo() {
     delete m_root;
@@ -27,11 +29,7 @@ void Drzewo::ustawEmbrion(PrzydzialZasobow p) {
     m_embrion = p;
 }
 
-Drzewo Drzewo::losowyGenotyp(P_geny prawdopodobienstwo) {
-    return losowyGenotyp(10, prawdopodobienstwo);
-}
-
-Drzewo Drzewo::losowyGenotyp(int liczbaWezlow, P_geny prawdopodobienstwa) {
+Drzewo Drzewo::losowyGenotyp(int liczbaWezlow, P_geny prawdopodobienstwa, const Graf &graf) {
     Drzewo d;
     d.m_root = new Node(0);
     for (int i = 0; i < liczbaWezlow; i++) {
@@ -39,7 +37,7 @@ Drzewo Drzewo::losowyGenotyp(int liczbaWezlow, P_geny prawdopodobienstwa) {
         Node* dziecko = tmp->dodajDziecko(i+1);
         dziecko->m_gen = losowyGen(prawdopodobienstwa);
     }
-    //TODO: wygenerować embrion xD
+    d.m_embrion = PrzydzialZasobow::losowyPrzydzial(graf.numeryWierzcholkow(), graf.iloscZasobow);
     return d;
 }
 

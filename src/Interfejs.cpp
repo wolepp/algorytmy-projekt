@@ -11,12 +11,6 @@ Parametry pobierzWszystkieParametry() {
         std::cin >> parametry.alfa;
     } while (parametry.alfa < 1);
 
-    // maksymalny czas wykonania rozwiązania
-    do {
-        std::cout << "Podaj maksymalny czas wykonania zadania: ";
-        std::cin >> parametry.maksymalnyCzas;
-    } while (parametry.maksymalnyCzas <= 0);
-
     // beta, gamma, delta
     do {
         std::cout << "Podaj parametr beta ";
@@ -149,12 +143,6 @@ void poprawParametr(Parametry &parametry, char parametr) {
             } while (parametry.P_gen1 + parametry.P_gen2 + parametry.P_gen3 + parametry.P_gen4 > 1
                      || parametry.P_gen4 < 0);
             break;
-        case 'm':
-        case 'M':
-            do {
-                std::cout << "Maksymalny czas wykonania rozwiazania: ";
-                std::cin >> parametry.maksymalnyCzas;
-            } while (parametry.maksymalnyCzas <= 0);
         default:
             std::cout << "Nie ma takiego parametru!\n";
     }
@@ -164,8 +152,7 @@ void poprawParametry(Parametry &parametry) {
     char ch;
     std::cout << "Podaj parametr do poprawy:\na - alfa\nb - beta\ng - gamma\nd - delta\ne - epsilon\n"
                  "c\nt\n1 - prawdopodobieństwo genu 1\n2 - prawdopodobieństwo genu 2\n"
-                 "3 - prawdopodobienstwo genu 3\n4 - prawdopodobieństwo genu 4\n"
-                 "m - maksymalny czas wykonania zadania" << std::endl;
+                 "3 - prawdopodobienstwo genu 3\n4 - prawdopodobieństwo genu 4\n";
     std::cin >> ch;
     poprawParametr(parametry, ch);
 }
@@ -180,7 +167,7 @@ Parametry Interfejs::pobierzParametry() {
     while (ch == 't') {
         poprawParametry(parametry);
         wyswietlParametry(parametry);
-        std::cout << "Poprawić parametry? t/N";
+        std::cout << "Poprawić parametry? t/N ";
         std::cin >> ch;
     }
     return parametry;

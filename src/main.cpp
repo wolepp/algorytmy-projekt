@@ -16,11 +16,11 @@ typedef std::vector<Drzewo*> Rozwiazania;
 /**
  * @param c parametr od użytkownika
  * @param t parametr od użytkownika
- * @param przydzialZasobow osobnik
+ * @param drzewo osobnik
  * @param graf daje czas i koszt potrzebny do obliczeń
  * @return wartość funkcji dopasowania wg wzoru: c*koszt + t*czas
  */
-void funkcjaDopasowania(int c, int t, PrzydzialZasobow &przydzialZasobow, Graf &graf);
+double funkcjaDopasowania(double c, double t, Drzewo &drzewo, Graf &graf);
 
 /**
  * Operator mutacji.
@@ -84,59 +84,70 @@ int main(int argc, char *argv[]) {
         // generuje drzewo o ilości węzłów między 5 a 15
         Drzewo* drzewo = new Drzewo(Drzewo::losowyGenotyp(
                 Random::losujInt(5, 15),
-                prawdGenow));
+                prawdGenow, graf));
         pokoleniePoczatkowe.push_back(drzewo);
     }
 
-    int minimumFD = INT_MAX;
+    double minimumFD = INT_MAX;
     int pokoleniaBezLepszego = 0;
-    Rozwiazania nowePokolenie;
+    int iloscPokolen = 0;
     PrzydzialZasobow najlepszy;
     while (pokoleniaBezLepszego < parametry.epsilon) {
+
+        for (auto rozwiazanie: pokoleniePoczatkowe) {
+            funkcjaDopasowania(parametry.c, parametry.t, *rozwiazanie, graf);
+        }
+
         // generowanie rozwiązań
         Rozwiazania zSelekcji = selekcja(pokoleniePoczatkowe, FI, graf);
         Rozwiazania zKrzyzowania = krzyzowanie(pokoleniePoczatkowe, PSI);
-        Rozwiazania zMutacji = mutacja(pokoleniePoczatkowe, OMEGA, P_geny());
+        Rozwiazania zMutacji = mutacja(pokoleniePoczatkowe, OMEGA, prawdGenow);
 
         // zapisywanie
-        nowePokolenie.reserve(zSelekcji.size() + zKrzyzowania.size() + zMutacji.size());
-        nowePokolenie.insert(nowePokolenie.end(), zSelekcji.begin(), zSelekcji.end());
+        Rozwiazania nowePokolenie = zSelekcji;
         nowePokolenie.insert(nowePokolenie.end(), zKrzyzowania.begin(), zKrzyzowania.end());
         nowePokolenie.insert(nowePokolenie.end(), zMutacji.begin(), zMutacji.end());
 
         // szukanie najlepszego rozwiązania
+        bool istniejeLepszy = false;
         for (auto rozwiazanie: nowePokolenie) {
-            int fd = rozwiazanie->fenotyp(graf).getWartoscFunkcjiDopasowania();
+            double fd = funkcjaDopasowania(parametry.c, parametry.t, *rozwiazanie, graf);
             if (fd < minimumFD) {
-                fd = minimumFD;
-                pokoleniaBezLepszego = 0;
+                minimumFD = fd;
                 najlepszy = rozwiazanie->fenotyp(graf);
-            } else {
-                pokoleniaBezLepszego++;
+                istniejeLepszy = true;
             }
         }
-
-        for (auto rozwiazanie: pokoleniePoczatkowe) {
-            delete rozwiazanie;
+        if (istniejeLepszy) {
+            pokoleniaBezLepszego = 0;
+        } else {
+            pokoleniaBezLepszego++;
         }
+
+        // usuwanie starych rozwiązań
+        for (auto it = pokoleniePoczatkowe.begin(); it != pokoleniePoczatkowe.end();){
+            delete *it;
+            it = pokoleniePoczatkowe.erase(it);
+        }
+
         // przeniesienie nowego pokolenia jako starego
-        pokoleniePoczatkowe.resize(nowePokolenie.size());
         pokoleniePoczatkowe.insert(pokoleniePoczatkowe.end(), nowePokolenie.begin(), nowePokolenie.end());
+        iloscPokolen++;
     }
 
     // wypisanie najlepszego przydziału zasobów
+    std::cout << "Znaleziono w " << iloscPokolen-parametry.epsilon << " pokoleniu\n";
+    std::cout << "Wartość funkcji dopasowania: " << minimumFD << std::endl;
     std::cout << najlepszy;
-
 
     return 0;
 }
 
-void funkcjaDopasowania(int c, int t, PrzydzialZasobow &przydzialZasobow, Graf &graf){
-
-    int f;
-    f=(c*graf.kosztWszystkichZadan(przydzialZasobow))+t* graf.czasZadanNaSciezceKrytycznej(przydzialZasobow);
-
-    przydzialZasobow.setWartoscFunkcjiDopasowania(f);
+double funkcjaDopasowania(double c, double t, Drzewo &drzewo, Graf &graf) {
+    auto fenotyp = drzewo.fenotyp(graf);
+    double f = (c*graf.kosztWszystkichZadan(fenotyp) + t*graf.czasZadanNaSciezceKrytycznej(fenotyp));
+    drzewo.wartoscFunkcjiDopasowania = f;
+    return f;
 }
 
 Rozwiazania krzyzowanie(Rozwiazania &osobniki, int liczbaRozwiazan) {
@@ -147,8 +158,8 @@ Rozwiazania krzyzowanie(Rozwiazania &osobniki, int liczbaRozwiazan) {
         int j = Random::losujInt(0, osobniki.size()-1);
         int k = Random::losujInt(0, osobniki.size()-1);
         // utworzenie ich kopii
-        Drzewo* drzewoA {osobniki[j]};
-        Drzewo* drzewoB {osobniki[k]};
+        auto* drzewoA = new Drzewo {*osobniki[j]};
+        auto* drzewoB = new Drzewo {*osobniki[k]};
         // wylosowanie punktów w których drzewa się skrzyżują
         int losowyWezelA = Random::losujInt(1, drzewoA->size()-1);
         int losowyWezelB = Random::losujInt(1, drzewoB->size()-1);
@@ -161,8 +172,8 @@ Rozwiazania krzyzowanie(Rozwiazania &osobniki, int liczbaRozwiazan) {
     }
     // jeśli jest nieparzyście do dodaj jeszcze jedno
     if (liczbaRozwiazan % 2 != 0) {
-        auto A {osobniki[Random::losujInt(0, osobniki.size()-1)]};
-        auto B {osobniki[Random::losujInt(0, osobniki.size()-1)]};
+        auto* A = new Drzewo {*osobniki[Random::losujInt(0, osobniki.size()-1)]};
+        auto* B = new Drzewo {*osobniki[Random::losujInt(0, osobniki.size()-1)]};
         auto pktA = A->znajdzWezel(Random::losujInt(1, A->size()-1));
         auto pktB = B->znajdzWezel(Random::losujInt(1, B->size()-1));
         std::swap(pktA, pktB);
@@ -175,7 +186,7 @@ Rozwiazania selekcja(Rozwiazania &pokolenie, int liczbaRozwiazan, Graf &graf) {
     Rozwiazania R;
     std::vector<std::pair<Drzewo*, int>> wartosciFD;
     for (Drzewo* drzewo: pokolenie) {
-        int wartoscFunkcji = drzewo->fenotyp(graf).getWartoscFunkcjiDopasowania();
+        int wartoscFunkcji = drzewo->wartoscFunkcjiDopasowania;
         wartosciFD.emplace_back(std::make_pair(drzewo, wartoscFunkcji));
     }
     std::sort(wartosciFD.begin(), wartosciFD.end(),
@@ -183,7 +194,8 @@ Rozwiazania selekcja(Rozwiazania &pokolenie, int liczbaRozwiazan, Graf &graf) {
         return lhs.second < rhs.second;
     });
     for (int i = 0; i < liczbaRozwiazan; i++) {
-        Drzewo *nowe {wartosciFD[i].first};
+        auto *nowe = new Drzewo(*wartosciFD[i].first);
+        R.push_back(nowe);
     }
 
     return R;
@@ -195,8 +207,8 @@ Rozwiazania mutacja(Rozwiazania &pokolenie, int liczbaRozwiazan, P_geny prawdopo
     for (int i = 0; i < liczbaRozwiazan; i++) {
         int indeks = Random::losujInt(0, pokolenie.size()-1);
         Drzewo* staryOsobnik = pokolenie[indeks];
-        Drzewo* nowyOsobnik {staryOsobnik};
-        nowyOsobnik->operatorMutacji(P_geny());
+        auto* nowyOsobnik = new Drzewo(*staryOsobnik);
+        nowyOsobnik->operatorMutacji(prawdopodobienstwaGenow);
         R.push_back(nowyOsobnik);
     }
 
