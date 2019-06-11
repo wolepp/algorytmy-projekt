@@ -159,8 +159,8 @@ Rozwiazania krzyzowanie(Rozwiazania &osobniki, int liczbaRozwiazan) {
         int j = Random::losujInt(0, osobniki.size()-1);
         int k = Random::losujInt(0, osobniki.size()-1);
         // utworzenie ich kopii
-        auto* drzewoA = new Drzewo {*osobniki[j]};
-        auto* drzewoB = new Drzewo {*osobniki[k]};
+        Drzewo* drzewoA = new Drzewo {*osobniki[j]};
+        Drzewo* drzewoB = new Drzewo {*osobniki[k]};
         // wylosowanie punktów w których drzewa się skrzyżują
         int losowyWezelA = Random::losujInt(1, drzewoA->size()-1);
         int losowyWezelB = Random::losujInt(1, drzewoB->size()-1);
@@ -173,8 +173,8 @@ Rozwiazania krzyzowanie(Rozwiazania &osobniki, int liczbaRozwiazan) {
     }
     // jeśli jest nieparzyście do dodaj jeszcze jedno
     if (liczbaRozwiazan % 2 != 0) {
-        auto* A = new Drzewo {*osobniki[Random::losujInt(0, osobniki.size()-1)]};
-        auto* B = new Drzewo {*osobniki[Random::losujInt(0, osobniki.size()-1)]};
+        Drzewo* A = new Drzewo {*osobniki[Random::losujInt(0, osobniki.size()-1)]};
+        Drzewo* B = new Drzewo {*osobniki[Random::losujInt(0, osobniki.size()-1)]};
         auto pktA = A->znajdzWezel(Random::losujInt(1, A->size()-1));
         auto pktB = B->znajdzWezel(Random::losujInt(1, B->size()-1));
         std::swap(pktA, pktB);
@@ -195,7 +195,7 @@ Rozwiazania selekcja(Rozwiazania &pokolenie, int liczbaRozwiazan, Graf &graf) {
         return lhs.second < rhs.second;
     });
     for (int i = 0; i < liczbaRozwiazan; i++) {
-        auto *nowe = new Drzewo(*wartosciFD[i].first);
+        Drzewo *nowe = new Drzewo(*wartosciFD[i].first);
         R.push_back(nowe);
     }
 
@@ -208,7 +208,7 @@ Rozwiazania mutacja(Rozwiazania &pokolenie, int liczbaRozwiazan, P_geny prawdopo
     for (int i = 0; i < liczbaRozwiazan; i++) {
         int indeks = Random::losujInt(0, pokolenie.size()-1);
         Drzewo* staryOsobnik = pokolenie[indeks];
-        auto* nowyOsobnik = new Drzewo(*staryOsobnik);
+        Drzewo* nowyOsobnik = new Drzewo(*staryOsobnik);
         nowyOsobnik->operatorMutacji(prawdopodobienstwaGenow);
         R.push_back(nowyOsobnik);
     }
