@@ -138,6 +138,7 @@ int main(int argc, char *argv[]) {
     // wypisanie najlepszego przydziału zasobów
     std::cout << "Znaleziono w " << iloscPokolen-parametry.epsilon << " pokoleniu\n";
     std::cout << "Wartość funkcji dopasowania: " << minimumFD << std::endl;
+    std::cout << "Czas: " << graf.czasZadanNaSciezceKrytycznej(najlepszy) << std::endl;
     std::cout << najlepszy;
 
     return 0;
